@@ -1,0 +1,65 @@
+﻿input {
+    max-width: none !important;
+}
+
+#productsInfo input[type=file] {
+    max-width: 230px !important;
+}
+
+#productsInfo .btn-group {
+    display: flex;
+}
+
+input:disabled {
+    background-color: #f9f9f9 !important;
+}
+
+.ValidationOK {
+    color: red;
+}
+
+.btnEmpRemove, btnProductRemove {
+    width: 100% !important;
+}
+
+.btnEmpAdd, btnProductAdd {
+    width: 100% !important;
+}
+
+
+
+
+
+
+
+
+
+.modWell {
+    padding: 2px !important;
+    margin-bottom: 1% !important;
+    margin-top: 2% !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+.borderMod {
+    border: 1px solid #c0c0c0 !important;
+}
+
+.setFloat {
+    float: right !important;
+}
+
+.ms-parent {
+    width: 100% !important;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.TextCenter {
+    text-align: center;
+}

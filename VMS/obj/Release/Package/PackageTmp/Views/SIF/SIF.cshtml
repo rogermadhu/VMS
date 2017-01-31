@@ -1,0 +1,471 @@
+﻿@{
+    ViewBag.Title = "SIF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    input {
+        max-width: none !important;
+    }
+    .input-group {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+    .ValidationOK {
+        color: red;
+    }
+    .borderMod {
+        border: 1px solid #c0c0c0 !important;
+    }
+    .Btn-Custom-Add{
+        padding: 6px 12px !important
+    }
+    .Btn-Custom-Remove{
+        padding: 6px 19px !important
+    }
+    /* document.getElementsByClassName("ProductAdd"); */
+</style>
+
+<div class="jumbotron">
+    <p class="lead"><h2>Supplier Inquery Form (SIF)</h2></p>
+</div>
+<form id="form" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Fill up the form with correct information&nbsp;<span style="color: red; font-size:small">(*) Marked are required.</span></h4>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon">ORGANIZATION NAME</span>
+                            <input class="form-control" id="txtOrgName" type="text">
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgName">*</span>
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <div class="col-xs-2" style="padding-left: 0; padding-right: 0; ">
+                                <span class="input-group-addon borderMod" style="white-space: pre-wrap;">BUSINESS TYPE</span>
+                            </div>
+                            <div class="col-xs-3" style="padding-left: 0">
+                                <select id="ddlOrgType" multiple="multiple" style="width:100% !important">
+                                    <option value="manufacturer">&nbsp;Manufacturer</option>
+                                    <option value="trader">&nbsp;Trader</option>
+                                    <option value="serviceprovider">&nbsp;Service Provider</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-2" style="text-align:right; padding-right:0;">
+                                <span class="" id="orgName">OTHER TYPE</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="col-sm-4 form-control" id="txtOrgType" type="text" />
+                            </div>
+                            <div class="col-xs-2" style="padding-left: 0px; text-align:left;">
+                                <button id="bTypeAdd" class="btn btn-primary" onclick="return false;">&nbsp;Add</button>
+                            </div>
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgType">*</span>
+
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName">DATE OF ESTABLISHMENT</span>
+                            <input class="form-control" id="txtOrgDOE" type="text">
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgDOE">*</span>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div><hr />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName" style="background-color: #f8f8f8 !important; border: 1px solid #aaa">ORGANIZATION ADDRESS</span>
+                        </div>
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName"><b>HEAD OFFICE / CORPORATE OFFICE</b></span>
+                            <div class="col-xs-12" style="padding-left:0; padding-right:0;">
+                                <input class="form-control" id="txtOrgHOAStreet" type="text">
+                            </div>
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgHOAStreet">*</span>
+                        </div>
+                    </p>
+                    <p>
+                        <div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">City</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgHOACity" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Thana</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgHOAThana" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Country</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgHOACountry" type="text">
+                            </div>
+                        </div>
+                    </p>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName"><b>SALES OFFICE</b></span>
+                            <div class="col-xs-12" style="padding-left:0; padding-right:0;">
+                                <input class="form-control" id="txtOrgSOAStreet" type="text">
+                            </div>
+                        </div>
+                    </p>
+                    <p>
+                        <div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">City</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgSOACity" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Thana</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgSOAThana" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Country</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgSOACountry" type="text">
+                            </div>
+                        </div>
+                    </p>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName"><b>FACTORY</b></span>
+                            <div class="col-xs-12" style="padding-left:0; padding-right:0;">
+                                <input class="form-control" id="txtOrgFAStreet" type="text">
+                            </div>
+                        </div>
+                    </p>
+                    <p>
+                        <div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">City</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgFACity" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Thana</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgFAThana" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Country</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgFACountry" type="text">
+                            </div>
+                        </div>
+                    </p>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName"><b>WAREHOUSE / DEPOT</b></span>
+                            <div class="col-xs-12" style="padding-left:0; padding-right:0;">
+                                <input class="form-control" id="txtOrgWHDAStreet" type="text">
+                            </div>
+                        </div>
+                    </p>
+                    <p>
+                        <div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">City</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgWHDACity" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Thana</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgWHDAThana" type="text">
+                            </div>
+                            <div class="col-xs-1">
+                                <span class="input-group-addon borderMod" id="orgName">Country</span>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="txtOrgWHDACountry" type="text">
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div><hr />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #f8f8f8 !important; border: 1px solid #aaa">PRODUCTS / SERVICES INFORMATION</span>
+                        </div>
+                    </p>
+                </div>
+                <div id="productsContainer" class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="col-xs-1" style="padding: 3px 0 3px 0;">
+                            <span class="input-group-addon borderMod" style="white-space: pre-wrap;">NAME</span>
+                        </div>
+                        <div class="col-xs-4" style="padding: 0px;">
+                            <div class="input-group">
+                                <input class="col-sm-4 form-control" type="text" onblur="validationOnFlyCustom(this, $(this).next()); return false;" value="" />
+                                <span class="input-group-addon alert-warning ValidationOK">*</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="col-xs-3" style="font-size: smaller; text-align: center;">CATALOGUE (OPTIONAL)</div>
+                            <div class="col-xs-9">
+                                <input type="file" class="btn btn-default btn-file" data-show-preview="false" style="padding: 2px; text-align:right" accept=".jpeg,.png,.jpg,.pdf" /> @*HERE*@
+                            </div>
+                        </div>
+                        <div class="col-xs-2 pull-right" style="text-align:center;">
+                            <button class="btn btn-primary Btn-Custom-Add" onclick="addProducts(this); return false;">&nbsp;ADD MORE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div><hr />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgName" style="background-color: #f8f8f8 !important; border: 1px solid #aaa">ORGANIZATION CONTACT INFORMATION</span>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="row" id="contactInformation">
+                <div class="col-md-12" id="contactPrimary">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">DESIGNATION</div>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="btn-group" id="contactHeadDesignation" data-toggle="buttons">
+                                    <label class="btn btn-default blue active">
+                                        <input type="radio" class="toggle" value="MD">MANAGING DIRECTOR
+                                    </label>
+                                    <label class="btn btn-default blue">
+                                        <input type="radio" class="toggle" value="CHAIR">CHAIRMAN
+                                    </label>
+                                    <label class="btn btn-default blue">
+                                        <input type="radio" class="toggle" value="CEO">CHIEF EXECUTIVE OFFICER
+                                    </label>
+                                    <label class="btn btn-default blue">
+                                        <input type="radio" class="toggle" value="OWNER">PROPRIETOR
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">NAME</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactPrimaryName" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactPrimaryName">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">CELLPHONE</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactPrimaryPhone" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactPrimaryPhone">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">EMAIL</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactPrimaryEmail" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactPrimaryEmail">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+
+                <div class="col-md-12" id="contactSecondary">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">DESIGNATION</div>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="btn-group" id="contactSecondaryDesignation" data-toggle="buttons">
+                                    <label class="btn btn-default blue active">
+                                        <input type="radio" class="toggle" value="HOS&M">HEAD OF SALES & MARKETING
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">NAME</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="txtOrgContactSecondaryName" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">CELLPHONE</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="txtOrgContactSecondaryPhone" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">EMAIL</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="txtOrgContactSecondaryEmail" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+
+                <div class="col-md-12" id="contactRepresentative">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">DESIGNATION</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group" id="contactRepresentativeDesignation" data-toggle="buttons">
+                                    <label class="btn btn-default blue active">
+                                        <input type="radio" class="toggle" value="Representative">REPRESENTATIVE NAME
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-2" style="text-align:right; font-size: small;">
+                                <span class="" id="orgName">ATTACH VISITING CARD (OPTIONAL)</span>
+                            </div>
+                            <div class="col-xs-4">
+                                <input id="fupOrgContactRepresentative" type="file" class="btn btn-default btn-file" data-show-preview="false" style="padding: 2px; text-align:right">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">NAME</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactRepresentativeName" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactRepresentativeName">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">CELLPHONE</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactRepresentativePhone" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactRepresentativePhone">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-2">
+                                <div class="input-group-addon borderMod">EMAIL</div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="input-group" style="padding: 0px">
+                                    <input class="form-control" id="txtOrgContactRepresentativeEmail" type="text">
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errOrgContactRepresentativeEmail">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-xs-3">
+                        <div class="input-group-addon borderMod">WEB ADDRESS (IF ANY)</div>
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="form-control" id="txtOrgWebsite" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <button id="btnSubmit" class="btn btn-primary pull-right" style="padding: 6px 80px !important" onclick="send(); return false;">&nbsp;SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Scripts.Render("~/bundles/sif")
