@@ -150,13 +150,52 @@ function addProducts(caller) {
 }
 
 function validateFields() {
-    if ($("form").find(".alert-danger").length > 0) {
-        $("html, body").animate({ scrollTop: $($("form").find(".alert-danger").first()).offset().top - 60 }, "slow");
-        return false;
+    if (($("#txtOrgName").val() == "") || ($("#txtOrgName").val() == null)) {
+        validationOnFlyCustom("#txtOrgName", "#errOrgName");
+    } else if (($("#ddlOrgType").multipleSelect("getSelects") == "") || ($("#ddlOrgType").multipleSelect("getSelects") == null)) {
+        validationOnFlyCustom("#txtOrgType", "#errOrgType");
+    } else if (($("#txtOrgDOE").val() == "") || ($("#txtOrgDOE").val() == null)) {
+        validationOnFlyCustom("#txtOrgDOE", "#errOrgDOE");
+    } else if (($("#txtOrgEmail").val() == "") || ($("#errOrgEmail").val() == null)) {
+        validationOnFlyCustom("#txtOrgEmail", "#errOrgEmail");
+    } else if (($("#txtOrgHOAStreet").val() == "") || ($("#errOrgHOAStreet").val() == null)) {
+        validationOnFlyCustom("#txtOrgHOAStreet", "#errOrgHOAStreet");
+    } else if (($("#txtOrgHOACity").val() == "") || ($("#txtOrgHOACity").val() == null)) {
+        validationOnFlyCustom("#txtOrgHOACity", "#errOrgHOAStreet");
+    } else if (($("#txtOrgHOAThana").val() == "") || ($("#txtOrgHOAThana").val() == null)) {
+        validationOnFlyCustom("#txtOrgHOAThana", "#errOrgHOAStreet");
+    } else if (($("#txtOrgHOACountry").val() == "") || ($("#txtOrgHOACountry").val() == null)) {
+        validationOnFlyCustom("#txtOrgHOACountry", "#errOrgHOAStreet");
+    } else if (($("#txtOrgContactPrimaryName").val() == "") || ($("#txtOrgContactPrimaryName").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactPrimaryName", "#errOrgContactPrimaryName");
+    } else if (($("#txtOrgContactPrimaryPhone").val() == "") || ($("#txtOrgContactPrimaryPhone").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactPrimaryPhone", "#errOrgContactPrimaryPhone");
+    } else if (($("#txtOrgContactPrimaryEmail").val() == "") || ($("#txtOrgContactPrimaryEmail").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactPrimaryEmail", "#errOrgContactPrimaryEmail");
+    } else if (($("#txtOrgContactRepresentativeName").val() == "") || ($("#txtOrgContactRepresentativeName").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactRepresentativeName", "#errOrgContactRepresentativeName");
+    } else if (($("#txtOrgContactRepresentativePhone").val() == "") || ($("#txtOrgContactRepresentativePhone").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactRepresentativePhone", "#errOrgContactRepresentativePhone");
+    } else if (($("#txtOrgContactRepresentativeEmail").val() == "") || ($("#txtOrgContactRepresentativeEmail").val() == null)) {
+        validationOnFlyCustom("#txtOrgContactRepresentativeEmail", "#errOrgContactRepresentativeEmail");
+    } else {
+        var pContainer = $("#productsContainer");
+        for (var i = 0; i < pContainer.length; i++) {
+            var products = $(pContainer).find('input[type="text"]');
+            for (var j = 0; j < products.length; j++) {
+                if ($(products[j]).val() == "") {
+                    validationOnFlyCustom($(products[j]), $(products[j]).next());
+                }
+            }
+        }
     }
-    else {
-        return true;
-    }
+    //if ($("form").find(".alert-danger").length > 0) {
+    //    $("html, body").animate({ scrollTop: $($("form").find(".alert-danger").first()).offset().top - 60 }, "slow");
+    //    return false;
+    //}
+    //else {
+    //    return true;
+    //}
 }
 
 function getDesignation(id) {
@@ -164,11 +203,19 @@ function getDesignation(id) {
 }
 
 function openNav() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+    $("#msg").text("");
+    $("#msg").append("<h2>PLEASE WAIT</h2><h4>SUBMITTING DATA</h4><br /><br /><h4>DO NOT CLOSE INTERNET CONNECTION!</h4>");
+
     document.getElementById("overlay").style.width = "100%";
+    document.getElementById("overlay").style.height = "100%";
+    document.getElementById('overlay').style.position = "absolute";
+    document.getElementById("overlay").style.zIndex = "2000";
 }
 
 function closeNav() {
     document.getElementById("overlay").style.width = "0%";
+    document.getElementById("overlay").style.display = "none";
 }
 
 function send() {
@@ -178,6 +225,7 @@ function send() {
             orgName = $('#txtOrgName').val(),
             orgType = $("#ddlOrgType").multipleSelect("getSelects"),
             orgDOE = $('#txtOrgDOE').val(),
+            orgEmail = $('#txtOrgEmail').val(),
 
             orgHOAStreet = $("#txtOrgHOAStreet").val(),
             orgHOACity = $("#txtOrgHOACity").val(),
@@ -226,7 +274,8 @@ function send() {
             }
         }
         if ($("#fupOrgContactRepresentative")[0].files.length > 0) {
-            fd.append($("#txtOrgName").val() + "_vCard_" + $("#txtOrgContactRepresentativeName").val(), $("#fupOrgContactRepresentative")[0].files[0]);
+            //fd.append($("#txtOrgName").val() + "_vCard_" + $("#txtOrgContactRepresentativeName").val(), $("#fupOrgContactRepresentative")[0].files[0]);
+            fd.append($("#txtOrgContactRepresentativeName").val().replace(/ /g, '') + "_vCard", $("#fupOrgContactRepresentative")[0].files[0]);
         }
         var other_data = $('form').serializeArray();
         $.each(other_data, function (key, input) {
@@ -236,6 +285,7 @@ function send() {
         fd.append("orgname", orgName);
         fd.append("orgtype", orgType);
         fd.append("orgdoe", orgDOE);
+        fd.append("orgemail", orgEmail);
         fd.append("orghoastreet", orgHOAStreet);
         fd.append("orghoacity", orgHOACity);
         fd.append("orghoathana", orgHOAThana);
@@ -273,18 +323,35 @@ function send() {
         }
 
         $.ajax({
-            url: '/sif/SubmitAction',
+            url: '/vms/sif/SubmitAction',
+            //url: '/sif/SubmitAction',
             data: fd,
             contentType: false,
             processData: false,
             type: 'POST',
             success: function (data) {
-                console.log(data);
-                window.location = "SIF/Success";
-                return true;
+                if (data.response == "success") {
+                    window.location = "/vms/sif/Success";
+                    return true;
+                }
+                else if (data.response == "email") {
+                    $("#msg").text("");
+                    $("#msg").append("<h2>ERROR</h2></br><h4>Company email address already exists.</h4><br /><h3>Contact administrator for details.</h3>");
+                    return false;
+                }
+                else {
+                    $("#msg").text("");
+                    $("#msg").append("<h2>ERROR</h2></br><h4>This company name is already registered.</h4><br /><h3>Contact administrator for details.</h3>");
+                    return false;
+                }
+            }
+            , error: function () {
+                $("#msg").text("");
+                $("#msg").append("<h2>ERROR</h2></br><h4>Please provide all the information and try again.</h4>");
             }
         });
         return false;
+        closeNav();
     }
     return false;
 }
@@ -347,6 +414,8 @@ $(document).ready(function () {
         format: "dd/mm/yyyy"
     });
     $("#txtOrgDOE").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("email", "#txtOrgEmail");
+    $("#txtOrgEmail").focusout(function () { if (($(this).attr("class")).indexOf("danger") !== -1) { } else { validationOnFly("id", this, "id", $(this).next()); } });
 
     regexPattern("address", "#txtOrgHOAStreet");
     $("#txtOrgHOAStreet").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });

@@ -1,0 +1,1414 @@
+﻿@{
+    ViewBag.Title = "ViewSEF";
+    Layout = "~/Views/Admin/Shared/_Layout.cshtml";
+}
+<style>
+.dataTableDiv {
+    background-color: #f0f0f0;
+    border: 1px solid;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 5px;
+    width: 100%;
+    -webkit-box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+    -moz-box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+    box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+}
+
+.dataTableDiv div div {
+    /*background-color:red;*/
+}
+
+ /* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #0c4da2;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #0c4da2;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 100px auto auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.close {
+    color: white !important;
+    padding: 3px !important;
+    margin-top: 10px !important;
+}
+
+/* Add Animation */
+@@-webkit-keyframes animatetop {
+    from {top: 600px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@@keyframes animatetop {
+    from {top: 600px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.table-btns {
+    width: 100%; 
+    margin: 2px 0 2px 0; 
+}
+.table-btnsBlue {
+    box-shadow: 0px 1px 1px 1px rgba(0,40,120,0.4);
+    webkit-box-shadow: 0px 1px 1px 1px rgba(0,40,120,0.4);
+    moz-box-shadow: 0px 1px 1px 1px rgba(0,40,120,0.4);
+}
+.table-btnsRed {
+    box-shadow: 0px 1px 1px 1px rgba(120,0,0,0.4);
+    webkit-box-shadow: 0px 1px 1px 1px rgba(120,0,0,0.4);
+    moz-box-shadow: 0px 1px 1px 1px rgba(120,0,0,0.4);
+}
+.table-btnsGreen {
+    box-shadow: 0px 1px 1px 1px rgba(0,120,0,0.4);
+    webkit-box-shadow: 0px 1px 1px 1px rgba(0,120,0,0.4);
+    moz-box-shadow: 0px 1px 1px 1px rgba(0,120,0,0.4);
+}
+
+.modal-Details {
+    max-width: 100%; 
+    min-width: 100%; 
+    margin: 2px 0 2px 0;
+}
+.align-right {
+    text-align:left;
+}
+</style>
+
+<h2 style="text-align: left">SEF Submitted Vendors</h2>
+
+<div class="dataTableDiv">
+    <table id="tblVendor">
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>VENDOR</th>
+                <th>TEMP CODE</th>
+                <th>DOE</th>
+                <th>WEBSITE</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>STATUS</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!-- The Modal -->
+<div id="Modal" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <input id="tempVid" type="hidden" value="">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>Vendor Information</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <ul class="nav nav-tabs" id="tabContent">
+                    <li class="active" id="details"><a href="#details" data-toggle="tab">Details</a></li>
+                    <li id="products"><a href="#products" data-toggle="tab">Products</a></li>
+                    <li id="employee"><a href="#employee" data-toggle="tab">Employpees</a></li>
+                    <li id="experience"><a href="#experience" data-toggle="tab">Experience</a></li>
+                    <li id="machines"><a href="#machines" data-toggle="tab">Machines</a></li>
+                    <li id="certifications"><a href="#certifications" data-toggle="tab">Certifications</a></li>
+                    <li id="financial"><a href="#financial" data-toggle="tab">Financial</a></li>
+                    <li id="contacts"><a href="#contacts" data-toggle="tab">Contacts</a></li>
+                    <li id="address"><a href="#address" data-toggle="tab">Address</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="control-group">
+                            <label class="control-label" id="detailsHeader"></label>
+                        </div>
+                        <div id="detailsContent">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="productsHeader"></label>
+                        </div>
+                        <div id="productsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="empolyeeHeader"></label>
+                        </div>
+                        <div id="employeeContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="experienceHeader"></label>
+                        </div>
+                        <div id="experienceContent">
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="machinesHeader"></label>
+                        </div>
+                        <div id="machinesContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="certificationsHeader"></label>
+                        </div>
+                        <div id="certificationsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="financialHeader"></label>
+                        </div>
+                        <div id="financialContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="contactsHeader"></label>
+                        </div>
+                        <div id="contactsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="addressHeader"></label>
+                        </div>
+                        <div id="addressContent">   </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+<div id="modalReject" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>REJECT VENDOR</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <input id="tempVidReject" type="hidden" value="">
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center; margin-bottom:10px;">
+                        <div id="msgReject"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center">
+                        <h4 style="color: red;">YOU ARE ABOUT TO REJECT SEF FORM</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5>Provide reason for rejection.</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="reason" style="text-align: left;
+                            width: 100%;
+                            max-width:none !important;
+                            height: 200px;"></textarea>
+                    </div>
+                </div>
+                <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: top">
+                        <input id="btnReject" type="text" class="btn btn-danger pull-right" onclick="PostReject($('#tempVidReject').val())" value="REJECT" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+<div id="modalApprove" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>APPROVE VENDOR</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <input id="tempVidApprove" type="hidden" value="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12" style="text-align:center; margin-bottom:10px;">
+                                <div id="msgApprove"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                &nbsp;
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-success btn-md pull-right" style="margin-top: 10px; margin-right: 28%;" onclick="PostApproved($('#tempVidApprove').val())">Approve</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/Content/DataTables/css/jquery.dataTables.min.css")
+@Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+@Scripts.Render("~/Scripts/DataTables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/DataTables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+
+<script type="text/javascript">
+    var modal = document.getElementById('Modal');
+    var span = document.getElementsByClassName("close")[0];
+    var modalApprove = document.getElementById('modalApprove');
+    var spanApprove = document.getElementsByClassName("close")[1];
+    var modalReject = document.getElementById('modalReject');
+    var spanReject = document.getElementsByClassName("close")[2];
+
+    function clearAllContentsModal() {
+        $("#detailsContent").text("");
+        $("#productsContent").text("");
+        $("#employeeContent").text("");
+        $("#experienceContent").text("");
+        $("#machinesContent").text("");
+        $("#certificationsContent").text("");
+        $("#financialContent").text("");
+        $("#contactsContent").text("");
+        $("#addressContent").text("");        
+    }
+    function ModalClearSetActive(tab) {
+        $("#" + tab).text("");
+        var t = $("#"+tab).parent().parent();
+        for (i = 0; i < t.children().length; i++) {
+            if ($(t.children()[i]).hasClass("active")) {
+                $(t.children()[i]).removeClass("active");
+            }
+        }
+        $("#"+tab).parent().addClass("active");
+    }
+
+    function GetDetails(URL, Data) {
+        ModalClearSetActive("detailsContent");    // <- this one
+        var containerS = "<div class=\"container-fluid\">";
+        var rowS = "<div class=\"row\">";
+        var colLg12 = "<div class=\"col-lg-12\">";
+        var colMd1 = "<div class=\"col-md-1\">";
+        var colMd2 = "<div class=\"col-md-2\">";
+        var colMd8 = "<div class=\"col-md-8\">";
+        var divE = "</div>";
+        
+        var content = $("#detailsContent");
+        var res = "";
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element = containerS;
+                    for (var i = 0; i < result["Table"].length; i++) {
+                            element += rowS;
+                                element += colLg12 + "<h4>VENDOR DETAILS</h4>" + divE;
+                            element += divE;
+                            element += rowS;
+                                element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Name</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["VENDOR_NAME"] +"\" />";
+                            element += divE;
+                            element += colMd1 + "&nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Temp ID</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["TEMPID"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Trade License</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["TRADE_LICENSE"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>TIN Number</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["TIN_NO"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Phone Number</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["TEL_NO"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Mobile Number</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" type=\"text\" readonly=\"readonly\" value=\""+ result["Table"][i]["CELL_NO"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;" + divE;
+                        element += divE;
+                        element += rowS;
+                            element += colMd1 + " &nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Fax Number</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                                element += "<input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table"][i]["FAX_NO"] +"\" />";
+                            element += divE;
+                            element += colMd1 + " &nbsp;"  + divE;
+                        element += divE;
+                    }// ends
+                    
+                        element += "<div class=\"row\" style=\"background-color:#f8f8f8; padding: 5px 0 5px 0\">";
+                            element += colMd1 + "&nbsp;" + divE;
+                            element += colMd2;
+                                element += "<h6><b>Business Type</b></h6>";
+                            element += divE;
+                            element += colMd8;
+                            for (var i = 0; i < result["Table1"].length; i++) {
+                                element += rowS;
+                                    element += "<div class=\"col-md-12\"><input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+result["Table1"][0]["BUSINESS"]+"\" />" + divE;
+                                element += divE;
+                            }
+                            element += divE;
+                            element += colMd1 + "&nbsp;" + divE;
+                        element += divE;
+                        if(result["Table2"].length > 0) {
+                            element += rowS;
+                                element += colMd1 + "&nbsp;" + divE;
+                                element += colMd2;
+                                    element += "<h6><b>Company Type</b></h6>";
+                                element += divE;
+                                element += colMd8;
+                                for (var i = 0; i < result["Table2"].length; i++) {
+                                    element += rowS;
+                                        element += "<div class=\"col-md-12\"><input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+result["Table2"][i]["COMPANY"]+"\" />" + divE;
+                                    element += divE;
+                                }
+                                element += divE;
+                                element += colMd1 + "&nbsp;" + divE;
+                            element += divE;
+                        }
+                        if(result["Table3"].length > 0) {
+                            element += "<div class=\"row\" style=\"background-color:#f8f8f8; padding: 5px 0 5px 0\">";
+                                element += colMd1 + "&nbsp;" + divE;
+                                element += colMd2;
+                                    element += "<h6><b>Category Type</b></h6>";
+                                element += divE;
+                                element += colMd8;
+                                for (var i = 0; i < result["Table3"].length; i++) {
+                                    element += rowS;
+                                        element += "<div class=\"col-md-12\"><input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table3"][i]["COMPANYCATEGORY"] +"\" />" + divE;
+                                    element += divE;
+                                }
+                                element += divE;
+                                element += colMd1 + "&nbsp;" + divE;
+                            element += divE;
+                        }
+                        if(result["Table5"].length > 0) {
+                            element += rowS;
+                                element += colMd1 + "&nbsp;" + divE;
+                                element += colMd2;
+                                    element += "<h6><b>Raw Material Import From</b></h6>";
+                                element += divE;
+                                element += colMd8;
+                                    element += rowS;
+                                        element += "<div class=\"col-md-6\">";
+                                            element += rowS;
+                                                element += colLg12 + "<h6><b>Country</b></h6>" + divE;
+                                            element += divE;
+                                        element += divE;
+                                    element += "<div class=\"col-md-6\">";
+                                        element += rowS;
+                                            element += colLg12 + "<h6><b>Material</b></h6>" + divE;
+                                        element += divE;
+                                    element += divE;
+                                element += divE;
+                            for (var i = 0; i < result["Table5"].length; i++) {
+                                element += rowS;
+                                    element += "<div class=\"col-md-6\">";
+                                        element += rowS;
+                                            element += colLg12 + "<input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table5"][i]["COUNTRY_NAME"] +"\" />" + divE;
+                                        element += divE;
+                                    element += divE;
+                                    element += "<div class=\"col-md-6\">";
+                                        element += rowS;
+                                            element += colLg12 + "<input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table5"][i]["MATERIAL_NAME"] +"\" />" + divE;
+                                        element += divE;
+                                    element += divE;
+                                element += divE;
+                            }
+                            element += divE;
+                            element += colMd1 + "&nbsp;" + divE;
+                            element += divE;
+                        }
+                        if(result["Table6"].length > 0) {
+                            element += "<div class=\"row\" style=\"background-color:#f8f8f8; padding: 5px 0 5px 0\">";
+                                element += colMd1 + "&nbsp;" + divE;
+                                element += colMd2;
+                                    element += "<h6><b>Admin Selected Category</b></h6>";
+                                element += divE;
+                                element += colMd8;
+                                    element += rowS;
+                                        element += "<div class=\"col-md-6\">";
+                                            element += rowS;
+                                                element += colLg12 + "<h6><b>Primary Category</b></h6>" + divE;
+                                            element += divE;
+                                        element += divE;
+                                        element += "<div class=\"col-md-6\">";
+                                            element += rowS;
+                                                element += colLg12 + "<h6><b>Sub Category</b></h6>" + divE;
+                                            element += divE;
+                                        element += divE;
+                                    element += divE;
+                                    for (var i = 0; i < result["Table6"].length; i++) {
+                                        element += rowS;
+                                            element += "<div class=\"col-md-6\">";
+                                                element += rowS;
+                                                    element += colLg12 + "<input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table6"][i]["PARENT"] +"\" />" + divE;
+                                                element += divE;
+                                            element += divE;
+                                            element += "<div class=\"col-md-6\">";
+                                                element += rowS;
+                                                    element += colLg12 + "<input class=\"form-control modal-Details\" readonly=\"readonly\" value=\""+ result["Table6"][i]["CHILD"] +"\" />" + divE;
+                                                element += divE;
+                                            element += divE;
+                                        element += divE;
+                                    }
+                                element += divE;
+                                element += colMd1 + "&nbsp;" + divE;
+                            element += divE;
+                        }
+                        element += divE;
+                    $(content).append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetProducts(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("productsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var content = $("#productsContent");
+                    var element = containerS;
+
+                    for (var i = 0; i < result["Table"].length; i++) {
+                    element += row;
+                        element += "<div class=\"col-md-1\" style=\"height:150px !important;\">";
+                            element += "<p>SL</p>";
+                            element += "<h4>";
+                            element += "<div class=\"label label-default\">";
+                                element += i+1;
+                                    element += "</div>";
+                                element += "</h4>";
+                                element += "</div>";
+                                element += "<div class=\"col-md-6\" style=\"height:150px !important;\">";
+                                    element += "<p>Product Name</p>";
+                                    element += "<div class=\"list-group-item disabled\">";
+                                        element += result["Table"][i]["PRODUCT_NAME"];
+                                    element += "</div>";
+                                element += "</div>";
+                                element += "<div class=\"col-md-3\" style=\"height:150px !important;\">";
+                                    element += "<p>Product Type</p>"
+                                    element += "<div class=\"list-group-item disabled\">";
+                                    if(result["Table"][i]["IS_SERVICE"] == "Y") {
+                                        element += "<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" style=\"padding: 2px;\"></span>" + " Service";
+                                    }
+                                    else {
+                                        element += "Product";
+                                    }
+                                    element += divE;
+                                element += divE;
+                                element += "<div class=\"col-md-2\">";
+                                    element += "<p>Catalogue</p>";
+                                    element += "<img class=\"img-thumbnail pull-right\" style=\"width:150px; height:150px;\">";
+                                element += divE;
+                            element += divE;
+                        element += "<hr/>";
+                    }
+                    element += divE;
+                    content.append(element);                    
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetEmployee(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("employeeContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var content = $("#employeeContent");
+                    var element = "";
+                    element += containerS;
+	                    element += "<div class=\"row\" style=\"background-color: #ededed;\"> ";
+		                    element += "<div class=\"col-md-3\"><h6><b>Total Number of Employee</b></h6></div> ";
+		                    if (result["Table"].length > 0) {
+		                        element += "<div class=\"col-md-9\"><h6><b>" + result["Table"][0]["TTL_EMP"] + "</b></h6></div> ";
+		                    }
+		                    else {
+		                        element += "<div class=\"col-md-9\"><h6 style=\"color:red;\"><b> N/A </b></h6></div> ";
+		                    }
+	                    element += "</div> ";
+	                    element += "<div class=\"row\" style=\"background-color: #0c4da24d;\"> ";
+		                    element += "<div class=\"col-md-4\"><h6><b>EXPERIENCE AREA</b></h6></div> ";
+		                    element += "<div class=\"col-md-4\"><h6><b>QUANTITY</b></h6></div> ";
+		                    element += "<div class=\"col-md-4\"><h6><b>REMARKS</b></h6></div> ";
+	                    element += "</div> ";
+	                if(result["Table"].length > 0) {
+	                    for (var i = 0; i < result["Table"].length; i++) {
+	                        element += "<div class=\"row\"> ";
+	                            element += "<div class=\"col-md-4\"><h6>" + result["Table"][i]["AREA"] + "</h6></div> ";
+	                            element += "<div class=\"col-md-4\"><h6>" + result["Table"][i]["QTY"] + "</h6></div> ";
+	                            element += "<div class=\"col-md-4\"><h6>" + result["Table"][i]["REMARKS"] + "</h6></div> ";
+		                    element += "</div> ";
+                        }
+                    }
+	                element += "</div> ";
+	                content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetExperience(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("experienceContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                var content = $("#experienceContent");
+                if (result != null) {
+                    var element = "<div class=\"container-fluid\">";
+                    element += "<div class=\"row\" style=\"background-color: #ededed;\">";
+                        element += "<div class=\"col-md-1\"><h6><b>S/L</b></h6></div>";
+                        element += "<div class=\"col-md-3\"><h6><b>ORG NAME</b></h6></div>";
+                        element += "<div class=\"col-md-2\"><h6><b>AMOUNT</b></h6></div>";
+                        element += "<div class=\"col-md-1\"><h6><b>YEAR</b></h6></div>";
+                        element += "<div class=\"col-md-2\"><h6><b>GOODS</b></h6></div>";
+                        element += "<div class=\"col-md-3\"><h6><b>DESCRIPTION</b></h6></div>";
+                    element += "</div>";
+                    for (var i = 0; i < result["Table"].length; i++) {
+                        element += "<div class=\"row\">";
+                            element += "<div class=\"col-md-1\"><h6>" + result["Table"][i]["SL"] + "</h6></div>";
+                            element += "<div class=\"col-md-3\"><h6>" + result["Table"][i]["ORGNAME"] + "</h6></div>";
+                            element += "<div class=\"col-md-2\"><h6>" + result["Table"][i]["AMNT"] + "</h6></div>";
+                            element += "<div class=\"col-md-1\"><h6>" + result["Table"][i]["YR"] + "</h6></div>";
+                            element += "<div class=\"col-md-2\"><h6>" + result["Table"][i]["GOODS"] + "</h6></div>";
+                            element += "<div class=\"col-md-3\"><h6>" + result["Table"][i]["DESC"] + "</h6></div>";
+                        element += "</div>";
+                    }
+                    element += "</div>";
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetMachines(URL, Data) {
+        ModalClearSetActive("machinesContent");
+        var content = $("#machinesContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element = "";
+                        element += "<div class=\"container-fluid\">";
+                            element += "<div class=\"row\" style=\"background-color: #ededed;\">";
+                                element += "<div class=\"col-md-1\"><h6><b>S/L</b></h6></div>";
+                                element += "<div class=\"col-md-2\"><h6><b>MACHINE NAME</b></h6></div>";
+                                element += "<div class=\"col-md-2\"><h6><b>BRAND</b></h6></div>";
+                                element += "<div class=\"col-md-2\"><h6><b>ORIGIN</b></h6></div>";
+                                element += "<div class=\"col-md-3\"><h6><b>PURPOSE</b></h6></div>";
+                                element += "<div class=\"col-md-1\"><h6><b>QUANTITY</b></h6></div>";
+                                element += "<div class=\"col-md-1\"><h6><b>UOM</b></h6></div>";
+                            element += "</div>";
+                            for (var i = 0; i < result["Table"].length; i++) {
+                                element += "<div class=\"row\">";
+                                    element += "<div class=\"col-md-1\"><h6>" + result["Table"][i]["SL"] + "</h6></div>";
+                                    element += "<div class=\"col-md-2\"><h6>" + result["Table"][i]["NAME"] + "</h6></div>";
+                                    element += "<div class=\"col-md-2\"><h6>" + result["Table"][i]["BRAND"] + "</h6></div>";
+                                    element += "<div class=\"col-md-2\"><h6>" + result["Table"][i]["ORIGIN"] + "</h6></div>";
+                                    element += "<div class=\"col-md-3\"><h6>" + result["Table"][i]["PURPOSE"] + "</h6></div>";
+                                    element += "<div class=\"col-md-1\"><h6>" + result["Table"][i]["QTY"] + "</h6></div>";
+                                    element += "<div class=\"col-md-1\"><h6>" + result["Table"][i]["UOM"] + "</h6></div>";
+                                element += "</div>";
+                            }
+                        element += "</div>";
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetCertifications(URL, Data) {
+        ModalClearSetActive("certificationsContent");
+        var content = $("#certificationsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                //if (result != null) {
+                    var element = "";
+                    
+                    element += "<div class=\"container-fluid\">";
+	                    element += "<div class=\"row\" style=\"background-color: #ededed;\">";
+		                    element += "<div class=\"col-md-1\"><h6><b>S/L</b></h6></div>";
+		                    element += "<div class=\"col-md-4\"><h6><b>CERTIFICATE NAME</b></h6></div>";
+		                    element += "<div class=\"col-md-4\"><h6><b>REMARKS</b></h6></div>";
+		                    element += "<div class=\"col-md-3\"><h6><b>DESCRIPTION</b></h6></div>";
+	                    element += "</div>";
+	                    if(result["Table"].length > 0) {
+	                        for (var i = 0; i < result["Table"].length; i++) {
+	                            element += "<div class=\"row\">";
+		                            element += "<div class=\"col-md-1\"><h6>"+ result["Table"][i]["SL"] +"</h6></div>";
+		                            element += "<div class=\"col-md-4\"><h6>" + result["Table"][i]["CERNAME"] + "</h6></div>";
+		                            element += "<div class=\"col-md-4\"><h6>" + result["Table"][i]["REMARKS"] + "</h6></div>";
+		                            element += "<div class=\"col-md-3\"><h6>" + result["Table"][i]["DESCRIPTION"] + "</h6></div>";
+	                            element += "</div>";
+	                        }
+                        }
+	                    element += "<div class=\"row\"><div class=\"col-lg-12\">&nbsp;</div></div>";
+	                    element += "<div class=\"row\" style=\"background-color: #f5f5f5; padding: 10px 0 10px 0;\">";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<a target=\"_blank\" href=\"http://www.google.com\"><img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+		                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+	                    element += "</div>";
+                    element += "</div>";
+
+                    content.append(element);
+                //}
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetFinancial(URL, Data) {
+        ModalClearSetActive("financialContent");
+        var content = $("#financialContent");
+        var divE = "</div>";
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result["Table"].length > 0) {
+                    var element = "";
+                    element += "<div class=\"container-fluid\"> ";
+	                    element += "<div class=\"row\"> ";
+		                    element += "<div class=\"col-md-4\"> ";
+			                    element += "<label for=\"bankname\"><h6><b>BANK NAME</h6></b></label> ";
+			                    element += "<input class=\"form-control\" id=\"bankname\" type=\"text\" disabled value=\""+ result["Table"][0]["BANKNAME"] +"\" /> ";
+		                    element += "</div> ";
+		                    element += "<div class=\"col-md-4\">";
+		                        element += "<label for=\"accountname\"><h6><b>ACCOUNT NAME</h6></b></label> ";
+		                        element += "<input class=\"form-control\" id=\"accountname\" type=\"text\" disabled value=\"" + result["Table"][0]["ACCOUNTNAME"] + "\" /> ";
+		                    element += "</div> ";
+		                    element += "<div class=\"col-md-4\">";
+                                element += "<label for=\"accountno\"><h6><b>ACCOUNT NUMBER</h6></b></label> ";
+                                element += "<input class=\"form-control\" id=\"accountno\" type=\"text\" disabled value=\"" + result["Table"][0]["ACCOUNTNO"] + "\" /> ";
+                            element += "</div> ";
+	                    element += "</div> ";
+                        element += "<div class=\"row\"> ";
+		                    element += "<div class=\"col-md-4\"> ";
+			                    element += "<label for=\"address\"><h6><b>BANK ADDRESS</h6></b></label> ";
+			                    element += "<input class=\"form-control\" id=\"address\" type=\"text\" disabled value=\"" + result["Table"][0]["ADDRESS"] + "\" /> ";
+		                    element += "</div> ";
+		                    element += "<div class=\"col-md-4\">";
+		                        element += "<label for=\"swift\"><h6><b>SWIFT CODE</h6></b></label> ";
+		                        element += "<input class=\"form-control\" id=\"swift\" type=\"text\" disabled value=\"" + result["Table"][0]["SWIFT"] + "\" /> ";
+		                    element += "</div> ";
+		                    element += "<div class=\"col-md-4\">";
+                                element += "<label for=\"routingno\"><h6><b>ROUTING NUMBER</h6></b></label> ";
+                                element += "<input class=\"form-control\" id=\"routingno\" type=\"text\" disabled value=\"" + result["Table"][0]["ROUTINGNO"] + "\" /> ";
+                            element += "</div> ";
+	                    element += "</div> ";
+                    
+                        element += "<div class=\"row\"><div class=\"col-lg-12\"><hr /></div></div> ";
+                        element += "<div class=\"row\" style=\"background-color: #f0f0f0; border-radius: 5px;\"> ";
+	                        element += "<div class=\"col-lg-12\"> ";
+		                        element += "<h6><b>LAST THREE (3) YEARS ANNUAL REPORT</b></h6> ";
+	                        element += "</div> ";
+                        element += "</div> ";
+                        if (result["Table2"].length > 0) {
+                            for (var i = 0; i < result["Table2"].length; i++) {
+                                element += "<div class=\"row\"> ";
+	                                    element += "<div class=\"col-md-3\"><h6><b>YEAR</b></h6></div> ";
+	                                    element += "<div class=\"col-md-3\"><h6>" + result["Table2"][i]["YEAR"] + "</h6></div> ";
+		                                element += "<div class=\"col-md-3\"><h6><b>AMOUNT</b></h6></div> ";
+		                                element += "<div class=\"col-md-3\"><h6>" + result["Table2"][i]["VALUE"] + "</h6></div> ";
+	                            element += "</div> ";
+                            }
+                        }
+	                    element += "<div class=\"row\"><div class=\"col-lg-12\"><hr/></div></div>";
+	                    element += "<div class=\"row\" style=\"background-color: #e7e7e7; border-radius: 5px 5px 0px 0px;\"> ";
+	                        element += "<div class=\"col-lg-12\"> ";
+		                        element += "<h6><b>UPLOADED AUDIT IMAGE/S</b></h6> ";
+	                        element += "</div> ";
+                        element += "</div> ";
+	                    element += "<div class=\"row\" style=\"background-color: #f5f5f5; padding: 10px 0 10px 0;\">";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<a target=\"_blank\" href=\"http://www.google.com\"><img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+		                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+		                    element += "<div class=\"col-md-3 text-center\">";
+			                    element += "<img alt=\"Bootstrap Image Preview\" src=\"http://lorempixel.com/140/140/\" style=\"border: 2px solid #ffffff; box-shadow: 0px 1px 3px 3px rgba(0, 0, 255, .4);\" /></a>";
+		                    element += "</div>";
+	                    element += "</div>";
+                    element += "</div> ";
+
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetContacts(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var col6S = "<div class=\"col-md-6\">";
+        var fgS = "<div class=\"form-group\">";
+        var lblS = "<label class=\"col-sm-2 control-label\">";
+        var lblE = "</label>";
+        var divSM10S = "<div class=\"col-sm-12\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("contactsContent");
+        var content = $("#contactsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element = "<div class=\"control-group\"> ";
+                    element += row;
+                    for (var i = 0; i < result["Table"].length; i++) {
+                        element += "<div class=\"col-md-12\" style=\"background-color: ";
+                        if (result["Table"][i]["IS_POC"] == "Y") { element += "#ffcd85" } else { element += "#efefef"; }
+                            element += "; margin-bottom:10px; border: 1px solid #efefef; padding:5px\"> " +
+                              "<div class=\"col-md-1\"> " +
+                                "<b>SL: " + (i+1) + "</b> " +
+                              "</div> " +
+                              "<div class=\"col-md-6\"> " +
+                                "<div class=\"col-md-4\"> " +
+                                  "<b>Name: </b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["NAME"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                  "<b>Designation:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["DESIGNAME"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Phone No:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["TELNO"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Phone No:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["CELLNO"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Email:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  "<a href=\"mailto:" + result["Table"][i]["EMAIL"] + "\">" + result["Table"][i]["EMAIL"] + "</a>" +
+                                "</div>" +
+                              "</div> " +
+                              "<div class=\"col-md-5\" style=\"background-color: #f5f5f5; border: 2px solid #bcbcbc;\"><a href:roger.shubho@fdl.com.bd=\"\" <=\"\" a=\"\"> " +
+                                "</a><div style=\"max-height: 200px; min-height: 100px; text-align:center\"><a href:roger.shubho@fdl.com.bd=\"\" <=\"\" a=\"\"></a><a><img href=\"/content/uploads/test%20%/products/_proFile_0636123048359595778.jpeg\"></a></div> " +
+                              "</div> " +
+                            "</div> ";
+                    }
+                    element += divE + divE;
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetAddress(URL, Data) {
+        ModalClearSetActive("addressContent");
+        var content = $("#addressContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element =
+                        "<div class=\"control-group\">";
+                    for (var i = 0; i < result["Table"].length; i++) {
+                        element += "<div class=\"row\">" +
+                          "<div class=\"col-lg-12\" style=\"padding-top: 20px;\"></div>" +
+                        "</div>" +
+                        "<div class=\"row\" style=\"background-color: #efefef; padding-top:10px; margin: 0px; border: 1px solid #c8c8c8\">" +
+                              "<div class=\"col-lg-12\">" +
+                              "<div class=\"row\">" +
+                                "<div class=\"col-md-3\">" +
+                                  "<label>ADDRESS OF :</label>" +
+                                "</div>" +
+                                "<div class=\"col-md-9\">" +
+                                  "<label>" + result["Table"][i]["TYPE"] + "</label>" +
+                                "</div>" +
+                              "</div>" +
+                              "<div style=\"margin-left: 20px;\">" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>STREET ADDRESS</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["STREET"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>THANA</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["THANA"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>CITY</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["CITY"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>COUNTRY</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["COUNTRY"] +
+                                  "</div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>" +
+                          "</div>" +
+                        "</div>";
+                        }
+                        element += "</div>";
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    spanApprove.onclick = function () {
+        $("#tempVidApprove").val("");
+        modalApprove.style.display = "none";
+    }
+    spanReject.onclick = function () {
+        $("#tempVidReject").val("");
+        modalReject.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        if (event.target == modalApprove) {
+            $("#tempVidApprove").val("");
+            $("#ddlCategory").text("");
+            modalApprove.style.display = "none";
+        }
+        if (event.target == modalReject) {
+            $("#tempVidReject").val("");
+            modalReject.style.display = "none";
+        }
+    }
+
+    function OpenModal(id) {
+        // MAKE FIRST AJAX CALL
+        $("#tempVid").val(id);
+        bindDetails();
+        modal.style.display = "block";
+    }
+    function OpenModalReject(id) {
+        $("#tempVidReject").val(id);
+        $("#msgReject").html("&nbsp;");
+        $("#msgReject").removeClass("alert-danger");
+        modalReject.style.display = "block";
+    }
+    function OpenModalApprove(id) {
+        $("#tempVidApprove").val(id);
+        $("#msgApprove").html("&nbsp;");
+        $("#msgApprove").removeClass("alert-danger");
+        modalApprove.style.display = "block";
+    }
+
+    function bindDetails() {
+        var sector = "details";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetDetails("Vendors_GetSEF", data);
+    }
+    function bindProducts() {
+        var sector = "products";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetProducts("Vendors_GetSEF", data);
+    }
+    function bindEmployee() {
+        var sector = "employee";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetEmployee("Vendors_GetSEF", data);
+    }
+    function bindExperience() {
+        var sector = "exp";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetExperience("Vendors_GetSEF", data);
+    }
+    function bindMachines() {
+        var sector = "machines";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetMachines("Vendors_GetSEF", data);
+    }
+    function bindCertifications() {
+        var sector = "certification";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetCertifications("Vendors_GetSEF", data);
+    }
+    function bindFinancial() {
+        var sector = "fin";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetFinancial("Vendors_GetSEF", data);
+    }
+    function bindContacts() {
+        var sector = "contacts";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetContacts("Vendors_GetSEF", data);
+    }    
+    function bindAddress() {
+        var sector = "address";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetAddress("Vendors_GetSEF", data);
+    }
+    
+    // AJAX POST REJECT STARTS
+    function PostReject(id) {
+        if (id != null) {
+            var remarks = $("#reason").val();
+            var fd = new FormData();
+            fd.append("remarks", remarks);
+            fd.append("vid", id);
+
+            $.ajax({
+                url: 'PostRejectSEF',
+                data: fd,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    if (data["result"] == false) {
+                        $("#msgReject").html("<br /><strong>Check your internet connection and try again.</strong><br /><br />");
+                        $("#msgReject").addClass("alert-danger");
+                    }
+                    if (data["result"] == true) {
+                        $("#msgReject").html("<br /><strong>REJECTED</strong><br /><br />");
+                        $("#msgReject").addClass("alert-success");
+                        setTimeout(
+                          function () {
+                              window.location.reload();
+                          }, 3000);
+                    }
+                }
+            });
+            return false;
+        }
+        return false;
+    }
+    // AJAX POST REJECT ENDS
+
+    // AJAX POST APPROVED STARTS
+    function PostApproved(id) {
+        if (id != null) {
+            var fd = new FormData();
+            fd.append("vid", id);
+
+            $.ajax({
+                url: 'PostApprovedSEF',
+                data: fd,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    if (data["result"] == false) {
+                        $("#msgApprove").html("<br /><strong>Check Internet Connection and Retry Again.</strong><br /><br />");
+                        $("#msgApprove").addClass("alert-danger");
+                    }
+                    if (data["result"] == true) {
+                        $("#msgApprove").html("<br /><strong>APPROVED</strong><br /><br />");
+                        $("#msgApprove").addClass("alert-success");
+                        setTimeout(
+                          function () {
+                              window.location.reload();
+                          }, 3000);
+                    }
+                }
+            });
+            return false;
+        }
+        return false;
+    }
+    // AJAX POST APPROVED ENDS
+    $(document).ready(function () {
+        $(".container.body-content").css({ width: "100%"});
+        $("#tblVendor").css({"font-size": "9pt", "text-align": "center" });
+        // BIND MODAL TAB EVENTS HERE
+        $("#details").click(function () {
+            bindDetails();
+        });
+        $("#products").click(function () {
+            bindProducts();
+        });
+        $("#employee").click(function () {
+            bindEmployee();
+        });
+        $("#experience").click(function () {
+            bindExperience();
+        });
+        $("#machines").click(function () {
+            bindMachines();
+        });
+        $("#certifications").click(function () {
+            bindCertifications();
+        });
+        $("#contacts").click(function () {
+            bindContacts();
+        });
+        $("#financial").click(function () {
+            bindFinancial();
+        });
+        $("#address").click(function () {
+            bindAddress();
+        });
+        // LOAD DATATABLE
+        $("#tblVendor").DataTable({
+            "ajax": {
+                "url": "getVendorListSef",
+                "type": "GET",
+                "datatype": "json",
+                "contentType": "application/json; charset=utf-8",
+                "dataSrc": function (result) {
+                    console.log(result);
+                    return result;
+                }
+            },
+            "columnDefs": [
+                {"className": "dt-center", "targets": "_all"}
+            ],
+            "columns": [
+                { "data": "SL", "autoWidth": true, "defaultContent": "No Data" },
+                { "data": "VENDOR_NAME", "autoWidth": true, "defaultContent": "No Data" },
+                { "data": "CODE", "autoWidth": true, "defaultContent": "No Data" },
+                {
+                    "mData": null,
+                    "bSortable": true,
+                    "visible": true,
+                    "mRender": function (data, type, row) {
+                        return data["DOE"].substring(0, 10);
+                    },
+                    "defaultContent": "No Data"
+                },
+                { "data": "WEBSITE", "autoWidth": true },
+                { "data": "PHONE_NO", "autoWidth": true, "defaultContent": "No Data" },
+                { "data": "EMAIL", "autoWidth": true, "defaultContent": "No Data" },
+                { "data": "STATUS", "autoWidth": true, "defaultContent": "No Data" },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        var id = data["VENDOR_GUID"];
+                        return '<a id="1" class="btn btn-info btn-sm delete_modal table-btns table-btnsBlue" onClick="OpenModal(\'' + id + '\')">' + 'Details' + '</a>' + '<br />'
+                        + '<a id="1" class="btn btn-danger btn-sm delete_modal table-btns table-btnsRed" onClick="OpenModalReject(\'' + id + '\')">' + 'Reject' + '</a>' + '<br />'
+                        + '<a id="1" class="btn btn-success btn-sm delete_modal table-btns table-btnsRed" onClick="OpenModalApprove(\'' + id + '\')">' + 'Approve' + '</a>';
+                    }
+                }
+            ]
+        });
+    });
+
+
+    //function getDetails(vendor, sector)
+    //{
+    //    var data = { vendor: vendor, sector: sector };
+    //    //console.log(data);
+        
+    //    //PostData("/admin/VendorsList_GetDetails", data);
+    //    $.when(PostData("/admin/VendorsList_GetDetails", data)).done(function (res) {
+    //        //console.log(res);
+
+    //    });
+
+    //    var section = $("#" + sector);
+    //    section.html("<p style=\"padding: 10px;\">te3st</p>");
+    //    $("#detailsContent").text("test");
+    //}
+
+    
+</script>
+
+
+
+@*WORKS FINE*@
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tblVendor").DataTable({
+            "ajax": {
+                "url": "/admin/getVendorList",
+                "type": "GET",
+                "datatype": "json",
+                "contentType": "application/json; charset=utf-8",
+                "dataSrc": function (result) {
+                    //console.log(result);
+                    return result;
+                }
+            },
+            "columns": [
+                { "data": "SL", "autoWidth": true },
+                { "data": "CODE", "autoWidth": true },
+                { "data": "VENDOR_NAME", "autoWidth": true },
+                { "data": "WEBSITE", "autoWidth": true },
+                { "data": "PHONE_NO", "autoWidth": true },
+                { "data": "EMAIL", "autoWidth": true },
+                { "data": "STATUS", "autoWidth": true },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function (data, type, full) {
+                        //console.log("Data: " + data);
+                        //console.log("Type: " + type);
+                        //console.log("Full: " + full);
+                        return '<a class="btn btn-info btn-sm" href=#/' + data[0] + '>' + 'Edit' + '</a>';
+                    }
+                }
+            ]
+        });
+    });
+</script>*@
+
+@* JQuery WHEN FUNCTION *@
+@*function bindDetails() {
+    var vendor = "vendor";
+    var sector = "details";
+    var data = { vendor: vendor, sector: sector };
+    $.when(PostData("/admin/VendorsList_GetDetails", data)).done(function (res) {
+        console.log("res: " + res["Table"][0]["VENDOR_ID"]);
+
+        // MAKE HTML BIND FUNCTION HERE
+
+    });
+}*@
+
+@* ajax call *@
+@*//done: function() {
+//    return result.pro;
+//},
+//complete: function () {
+//    var t = $("#detailsHeader");
+//    t.html("<p style=\"padding: 10px;\">te3sasdasdt</p>");
+//},*@
+
+@*function clickEvent() {
+  alert("clicked");
+}
+
+$("#products").click(function() {
+  clickEvent();
+})*@

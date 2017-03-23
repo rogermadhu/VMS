@@ -15,6 +15,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>10/03/2016 18:23:33</publishTime>
     </File>
@@ -163,7 +166,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/VMS.dll">
-      <publishTime>10/13/2016 10:14:37</publishTime>
+      <publishTime>03/08/2017 17:36:44</publishTime>
+    </File>
+    <File Include="bin/VMS.pdb">
+      <publishTime>03/08/2017 17:36:44</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -240,8 +246,461 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>09/25/2016 12:51:56</publishTime>
     </File>
+    <File Include="Content/DataTables/css/autoFill.bootstrap.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.dataTables.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.foundation.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.foundation.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.jqueryui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.semanticui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/autoFill.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.bootstrap.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.dataTables.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.foundation.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.foundation.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.jqueryui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.semanticui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/buttons.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.bootstrap.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.dataTables.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.foundation.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.foundation.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.jqueryui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.semanticui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/colReorder.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/common.scss">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.bootstrap.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.foundation.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.foundation.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.jqueryui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.material.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.material.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.semanticui.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.uikit.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/dataTables.uikit.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.bootstrap.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.dataTables.css">
+      <publishTime>11/14/2016 11:48:59</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedColumns.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/fixedHeader.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/jquery.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/jquery.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/jquery.dataTables_themeroller.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/keyTable.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/mixins.scss">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/responsive.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/rowReorder.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.dataTables.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.foundation.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.foundation.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.jqueryui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.semanticui.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/scroller.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.bootstrap.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.bootstrap.min.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.bootstrap4.css">
+      <publishTime>11/14/2016 11:48:58</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.bootstrap4.min.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.dataTables.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.dataTables.min.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.foundation.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.foundation.min.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.jqueryui.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.jqueryui.min.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.semanticui.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/select.semanticui.min.css">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/css/semanticui.scss">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/details_close.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/details_open.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/sort_asc.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/sort_asc_disabled.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/sort_both.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/sort_desc.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/images/sort_desc_disabled.png">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Content/DataTables/swf/flashExport.swf">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
     <File Include="Content/ExtendedNav.css">
       <publishTime>09/25/2016 13:20:43</publishTime>
+    </File>
+    <File Include="Content/fdlsamsung.png">
+      <publishTime>02/22/2017 13:15:17</publishTime>
+    </File>
+    <File Include="Content/login.css">
+      <publishTime>10/18/2016 14:33:41</publishTime>
+    </File>
+    <File Include="Content/Members/Enlistment.css">
+      <publishTime>10/19/2016 14:48:02</publishTime>
     </File>
     <File Include="Content/multiple-select.css">
       <publishTime>09/27/2016 11:47:39</publishTime>
@@ -375,6 +834,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/themes/base/tooltip.css">
       <publishTime>09/25/2016 12:49:51</publishTime>
     </File>
+    <File Include="Content/Uploads/Test Organization/Products/_proFile_0636123048359595778.jpeg">
+      <publishTime>10/17/2016 12:40:35</publishTime>
+    </File>
+    <File Include="Content/Uploads/Test Organization/VCards/Test Organization_vCard_roger636123048359655807.png">
+      <publishTime>10/17/2016 12:40:35</publishTime>
+    </File>
     <File Include="favicon.ico">
       <publishTime>09/25/2016 12:48:36</publishTime>
     </File>
@@ -397,7 +862,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 12:48:36</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>10/03/2016 18:24:01</publishTime>
+      <publishTime>11/15/2016 16:26:32</publishTime>
     </File>
     <File Include="Scripts/ai.0.22.9-build00167.js">
       <publishTime>09/25/2016 12:48:53</publishTime>
@@ -417,6 +882,228 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>09/25/2016 12:51:56</publishTime>
     </File>
+    <File Include="Scripts/DataTables/autoFill.bootstrap.js">
+      <publishTime>11/14/2016 11:48:57</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.bootstrap.min.js">
+      <publishTime>11/14/2016 11:48:55</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.bootstrap4.js">
+      <publishTime>11/14/2016 11:48:55</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.bootstrap4.min.js">
+      <publishTime>11/14/2016 11:48:52</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.foundation.js">
+      <publishTime>11/14/2016 11:48:52</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.foundation.min.js">
+      <publishTime>11/14/2016 11:48:50</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.jqueryui.js">
+      <publishTime>11/14/2016 11:48:50</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.jqueryui.min.js">
+      <publishTime>11/14/2016 11:48:48</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.semanticui.js">
+      <publishTime>11/14/2016 11:48:47</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/autoFill.semanticui.min.js">
+      <publishTime>11/14/2016 11:48:25</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.bootstrap.js">
+      <publishTime>11/14/2016 11:48:25</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.bootstrap.min.js">
+      <publishTime>11/14/2016 11:48:23</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.bootstrap4.js">
+      <publishTime>11/14/2016 11:48:23</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.bootstrap4.min.js">
+      <publishTime>11/14/2016 11:48:21</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.colVis.js">
+      <publishTime>11/14/2016 11:48:21</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.colVis.min.js">
+      <publishTime>11/14/2016 11:48:19</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.flash.js">
+      <publishTime>11/14/2016 11:48:19</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.flash.min.js">
+      <publishTime>11/14/2016 11:48:17</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.foundation.js">
+      <publishTime>11/14/2016 11:48:16</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.foundation.min.js">
+      <publishTime>11/14/2016 11:48:14</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.html5.js">
+      <publishTime>11/14/2016 11:48:14</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.html5.min.js">
+      <publishTime>11/14/2016 11:48:12</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.jqueryui.js">
+      <publishTime>11/14/2016 11:48:12</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.jqueryui.min.js">
+      <publishTime>11/14/2016 11:48:10</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.print.js">
+      <publishTime>11/14/2016 11:48:10</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.print.min.js">
+      <publishTime>11/14/2016 11:48:08</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.semanticui.js">
+      <publishTime>11/14/2016 11:48:08</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/buttons.semanticui.min.js">
+      <publishTime>11/14/2016 11:48:05</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.autoFill.js">
+      <publishTime>11/14/2016 11:48:05</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.autoFill.min.js">
+      <publishTime>11/14/2016 11:48:03</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.bootstrap.js">
+      <publishTime>11/14/2016 11:48:03</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.bootstrap.min.js">
+      <publishTime>11/14/2016 11:48:01</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.bootstrap4.js">
+      <publishTime>11/14/2016 11:48:01</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.bootstrap4.min.js">
+      <publishTime>11/14/2016 11:47:59</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.buttons.js">
+      <publishTime>11/14/2016 11:47:59</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.buttons.min.js">
+      <publishTime>11/14/2016 11:47:57</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.colReorder.js">
+      <publishTime>11/14/2016 11:47:57</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.colReorder.min.js">
+      <publishTime>11/14/2016 11:47:56</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.fixedColumns.js">
+      <publishTime>11/14/2016 11:47:56</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.fixedColumns.min.js">
+      <publishTime>11/14/2016 11:47:54</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.fixedHeader.js">
+      <publishTime>11/14/2016 11:47:54</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.fixedHeader.min.js">
+      <publishTime>11/14/2016 11:47:52</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.foundation.js">
+      <publishTime>11/14/2016 11:47:52</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.foundation.min.js">
+      <publishTime>11/14/2016 11:47:51</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.jqueryui.js">
+      <publishTime>11/14/2016 11:47:51</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.jqueryui.min.js">
+      <publishTime>11/14/2016 11:47:49</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.keyTable.js">
+      <publishTime>11/14/2016 11:47:49</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.keyTable.min.js">
+      <publishTime>11/14/2016 11:47:46</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.material.js">
+      <publishTime>11/14/2016 11:47:46</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.material.min.js">
+      <publishTime>11/14/2016 11:47:44</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.responsive.js">
+      <publishTime>11/14/2016 11:47:44</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.responsive.min.js">
+      <publishTime>11/14/2016 11:47:42</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.rowReorder.js">
+      <publishTime>11/14/2016 11:47:42</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.rowReorder.min.js">
+      <publishTime>11/14/2016 11:47:40</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.scroller.js">
+      <publishTime>11/14/2016 11:47:40</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.scroller.min.js">
+      <publishTime>11/14/2016 11:47:39</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.select.js">
+      <publishTime>11/14/2016 11:47:38</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.select.min.js">
+      <publishTime>11/14/2016 11:47:37</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.semanticui.js">
+      <publishTime>11/14/2016 11:47:37</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.semanticui.min.js">
+      <publishTime>11/14/2016 11:47:35</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.uikit.js">
+      <publishTime>11/14/2016 11:47:35</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/dataTables.uikit.min.js">
+      <publishTime>11/14/2016 11:47:33</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/jquery.dataTables.js">
+      <publishTime>11/14/2016 11:47:33</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/jquery.dataTables.min.js">
+      <publishTime>11/14/2016 11:47:32</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.bootstrap.js">
+      <publishTime>11/14/2016 11:47:32</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.bootstrap.min.js">
+      <publishTime>11/14/2016 11:47:31</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.bootstrap4.js">
+      <publishTime>11/14/2016 11:47:31</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.bootstrap4.min.js">
+      <publishTime>11/14/2016 11:47:30</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.foundation.js">
+      <publishTime>11/14/2016 11:47:30</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.foundation.min.js">
+      <publishTime>11/14/2016 11:47:28</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.jqueryui.js">
+      <publishTime>11/14/2016 11:47:28</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.jqueryui.min.js">
+      <publishTime>11/14/2016 11:47:27</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.semanticui.js">
+      <publishTime>11/14/2016 11:47:27</publishTime>
+    </File>
+    <File Include="Scripts/DataTables/responsive.semanticui.min.js">
+      <publishTime>11/14/2016 11:47:25</publishTime>
+    </File>
     <File Include="Scripts/jquery-3.1.0.js">
       <publishTime>09/25/2016 12:51:55</publishTime>
     </File>
@@ -434,6 +1121,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-3.1.0.slim.min.map">
       <publishTime>09/25/2016 12:51:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.js">
+      <publishTime>11/14/2016 10:51:18</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.js">
+      <publishTime>11/14/2016 10:51:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.map">
+      <publishTime>11/14/2016 10:51:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.js">
+      <publishTime>11/14/2016 10:51:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.js">
+      <publishTime>11/14/2016 10:51:15</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.map">
+      <publishTime>11/14/2016 10:51:15</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.12.1.js">
       <publishTime>09/25/2016 12:49:51</publishTime>
@@ -654,6 +1359,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/locales/bootstrap-datepicker.zh-TW.min.js">
       <publishTime>09/29/2016 14:55:49</publishTime>
     </File>
+    <File Include="Scripts/login.js">
+      <publishTime>03/08/2017 10:17:16</publishTime>
+    </File>
+    <File Include="Scripts/login.min.js">
+      <publishTime>02/26/2017 16:56:06</publishTime>
+    </File>
+    <File Include="Scripts/Members/Enlistment.js">
+      <publishTime>03/02/2017 17:00:25</publishTime>
+    </File>
+    <File Include="Scripts/Members/Enlistment.min.js">
+      <publishTime>02/26/2017 16:39:27</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>09/25/2016 12:52:06</publishTime>
     </File>
@@ -673,10 +1390,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 12:52:09</publishTime>
     </File>
     <File Include="Scripts/Shared/sif.js">
-      <publishTime>10/13/2016 10:09:35</publishTime>
+      <publishTime>03/06/2017 17:11:53</publishTime>
+    </File>
+    <File Include="Scripts/Shared/sif.min.js">
+      <publishTime>02/26/2017 16:34:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/05/2016 14:30:29</publishTime>
+      <publishTime>11/15/2016 16:48:56</publishTime>
+    </File>
+    <File Include="Views/Admin/Index.cshtml">
+      <publishTime>11/08/2016 10:42:02</publishTime>
+    </File>
+    <File Include="Views/Admin/Shared/_Layout.cshtml">
+      <publishTime>02/20/2017 17:34:10</publishTime>
+    </File>
+    <File Include="Views/Admin/VendorsList.cshtml">
+      <publishTime>01/29/2017 11:43:36</publishTime>
+    </File>
+    <File Include="Views/Admin/ViewSIF.cshtml">
+      <publishTime>03/08/2017 15:30:07</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>09/25/2016 12:48:36</publishTime>
@@ -685,22 +1417,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 12:48:36</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/13/2016 10:10:43</publishTime>
+      <publishTime>03/08/2017 12:27:20</publishTime>
+    </File>
+    <File Include="Views/Login/Login.cshtml">
+      <publishTime>03/08/2017 10:21:10</publishTime>
     </File>
     <File Include="Views/Members/Enlistment/Enlistment.cshtml">
-      <publishTime>10/05/2016 10:20:38</publishTime>
+      <publishTime>03/08/2017 17:36:31</publishTime>
+    </File>
+    <File Include="Views/Members/Enlistment/Success.cshtml">
+      <publishTime>02/26/2017 12:58:01</publishTime>
     </File>
     <File Include="Views/Members/Shared/_Layout.cshtml">
-      <publishTime>10/03/2016 09:52:58</publishTime>
+      <publishTime>03/08/2017 10:28:54</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/25/2016 12:48:36</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/29/2016 15:20:34</publishTime>
+      <publishTime>11/15/2016 11:57:38</publishTime>
     </File>
     <File Include="Views/SIF/SIF.cshtml">
-      <publishTime>10/10/2016 12:33:15</publishTime>
+      <publishTime>03/06/2017 12:28:04</publishTime>
     </File>
     <File Include="Views/SIF/SubmitActionTrue.cshtml">
       <publishTime>10/09/2016 16:26:29</publishTime>
@@ -712,7 +1450,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 12:48:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/13/2016 10:14:41</publishTime>
+      <publishTime>03/05/2017 16:02:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

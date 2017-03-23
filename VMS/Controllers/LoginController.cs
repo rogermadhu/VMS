@@ -30,8 +30,15 @@ namespace VMS.Controllers
                 if ((userData.Rows[0].ItemArray[0].ToString() == "Y")
                     && (userData.Rows[0].ItemArray[1].ToString() == "Y"))
                 {
-                    Authentication.SetSessionLogin(ml.Un, ml.Pw, "VENDOR");
-                    ret = "members/enlistment";
+                    if (userData.Rows[0].ItemArray[2].ToString() == "A")
+                    {
+                        Authentication.SetSessionLogin(ml.Un, ml.Pw, "VENDOR");
+                        ret = "members/enlistment";
+                    }
+                    else if (userData.Rows[0].ItemArray[2].ToString() == "P")
+                    {
+                        ret = "PENDING";
+                    }
                 }
                 else if ((userData.Rows[0].ItemArray[0].ToString() == "Y")
                     && (userData.Rows[0].ItemArray[1].ToString() == "N"))

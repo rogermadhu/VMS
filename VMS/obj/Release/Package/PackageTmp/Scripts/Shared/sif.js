@@ -1,87 +1,4 @@
-﻿$(document).ready(function () {
-    //working fine
-    $("#ddlOrgType").multipleSelect({
-        onOpen: function () {
-            $("#errOrgType").text("*");
-            $("#txtOrgType").removeClass("alert-danger");
-        },
-        onClose: function () {
-            if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
-                $("#errOrgType").text("This Field Is Required.");
-                $("#txtOrgType").addClass("alert-danger");
-            }
-            else {
-                $("#errOrgType").text("*");
-                $("#txtOrgType").removeClass("alert-danger");
-            }
-        }
-    });
-
-    $("#bTypeAdd").click(function () {
-        var $select = $("#ddlOrgType"),
-            $input = $("#txtOrgType"),
-            $selected = $("#refreshSelected"),
-            value = $.trim($input.val()),
-            $opt = $("<option />", {
-                value: value,
-                text: " " + value
-            });
-        if (!value) {
-            $input.focus();
-            return;
-        }
-        $opt.prop("selected", true);
-        $input.val("");
-        $("#errOrgType").text("*");
-        $("#txtOrgType").removeClass("alert-danger");
-        $select.append($opt).multipleSelect("refresh");
-    });
-
-    $("#txtOrgName").focus();
-    regexPattern("alphabet", "#txtOrgName");
-    $("#txtOrgName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    regexPattern("alphabet", "#txtOrgType");
-    $("#txtOrgType").focusout(function () {
-        if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
-            $("#errOrgType").text("This Field Is Required.");
-            $("#txtOrgType").addClass("alert-danger");
-        }
-        else {
-            $("#errOrgType").text("*");
-            $("#txtOrgType").removeClass("alert-danger");
-        }
-    });
-    regexPattern("date", "#txtOrgDOE");
-    $("#txtOrgDOE").datepicker({
-        format: "dd/mm/yyyy"
-    });
-    $("#txtOrgDOE").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-
-    regexPattern("address", "#txtOrgHOAStreet");
-    $("#txtOrgHOAStreet").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
-    regexPattern("alphabet&number", "#txtOrgHOACity");
-    $("#txtOrgHOACity").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
-    regexPattern("alphabet", "#txtOrgHOAThana");
-    $("#txtOrgHOAThana").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
-    regexPattern("alphabet", "#txtOrgHOACountry");
-    $("#txtOrgHOACountry").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
-    
-    regexPattern("alphabet", "#txtOrgContactPrimaryName");
-    $("#txtOrgContactPrimaryName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    regexPattern("number", "#txtOrgContactPrimaryPhone");
-    $("#txtOrgContactPrimaryPhone").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    regexPattern("email", "#txtOrgContactPrimaryEmail");
-    $("#txtOrgContactPrimaryEmail").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    
-    regexPattern("alphabet", "#txtOrgContactRepresentativeName");
-    $("#txtOrgContactRepresentativeName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    regexPattern("number", "#txtOrgContactRepresentativePhone");
-    $("#txtOrgContactRepresentativePhone").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-    regexPattern("email", "#txtOrgContactRepresentativeEmail");
-    $("#txtOrgContactRepresentativeEmail").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
-});
-
-function validationOnFly(elementType, elementKey, errorEType, errorKey)
+﻿function validationOnFly(elementType, elementKey, errorEType, errorKey)
 {
     if (elementType == "class") {
         if ($(elementKey).length > 0) {
@@ -90,7 +7,6 @@ function validationOnFly(elementType, elementKey, errorEType, errorKey)
         else {
             elementKey = "." + elementKey;
         }
-        
     }
     else if (elementType == "id") {
         if ($(elementKey).length > 0) {
@@ -173,35 +89,19 @@ function regexPattern(type, id) {
         });
     }
     if (type == "email") {
-        $(id).keyup(function () {
-            var newValue = $(this).val().replace(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/, '');
-            $(this).val(newValue);
+        $(id).keyup(function validateEmail() {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if ($(this).val() == '' || !re.test($(this).val())) {
+                $(this).addClass("alert-danger");
+                $(this).next().text("Enter Valid Email.");
+                $(this).next().addClass("alert-warning");
+            }
+            else {
+                $(this).removeClass("alert-danger");
+                $(this).next().text("*");
+                //$(this).next().removeClass("alert-warning");
+            }
         });
-    }
-}
-
-function fieldValidation(fieldElementId, errorElementId) {
-    if ($("#" + fieldElementId).val().trim() == "") {
-        $("#" + errorElementId).text("This Field Is Required.");
-        $("html, body").animate({ scrollTop: $("#" + fieldElementId).offset().top - 60 }, "slow");
-        $("#" + fieldElementId).addClass("alert-danger");
-    }
-    else {
-        $("#" + errorElementId).text("*");
-        $("#" + fieldElementId).removeClass("alert-danger");
-    }
-}
-
-function fieldValidationDDL() {
-    if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
-        $("#errOrgType").text("This Field Is Required.");
-        $("html, body").animate({ scrollTop: $("#ddlOrgType").offset().top - 60 }, "slow");
-        $("#txtOrgType").addClass("alert-danger");
-    }
-    else {
-        $("#errOrgType").text("*");
-        $("#errOrgType").removeClass("alert-danger");
-        $("#txtOrgType").removeClass("alert-danger");
     }
 }
 
@@ -211,31 +111,41 @@ function removeProducts(caller) {
 
 function addProducts(caller) {
     $(caller).removeClass("Btn-Custom-Add");
-    var content = "<div class=\"col-md-12\">" +
-        "<div class=\"col-xs-1\" style=\"padding: 3px 0 3px 0;\">" +
-            "<span class=\"input-group-addon borderMod\" style=\"white-space: pre-wrap;\">NAME</span>" +
-        "</div>" +
-        "<div class=\"col-xs-4\" style=\"padding: 0px;\">" +
-            "<div class=\"input-group\">" +
-                "<input class=\"col-sm-4 form-control products\" type=\"text\" onblur=\"validationOnFlyCustom(this, $(this).next()); return false;\" />" +
-                "<span class=\"input-group-addon alert-warning ValidationOK errRroducts\">*</span>" +
+    var content =
+        "<div class=\"col-md-12\">" +
+            "<div class=\"col-xs-1\" style=\"padding: 3px 0 3px 0;\">" +
+                "<span class=\"input-group-addon borderMod\" style=\"white-space: pre-wrap;\">NAME</span>" +
             "</div>" +
-        "</div>" +
-        "<div class=\"col-xs-5\">" +
-            "<div class=\"col-xs-3\" style=\"font-size: smaller; text-align: center;\">CATALOGUE (OPTIONAL)</div>" +
-            "<div class=\"col-xs-9\">" +
-                "<input type=\"file\" class=\"btn btn-default btn-file\" data-show-preview=\"false\" style=\"padding: 2px; text-align:right\" multiple accept=\".jpeg,.png,.jpg\" />" +
+            "<div class=\"col-xs-3\" style=\"padding: 0px;\">" +
+                "<div class=\"input-group\">" +
+                    "<input autofocus class=\"col-sm-4 form-control products\" type=\"text\" onblur=\"validationOnFlyCustom(this, $(this).next()); return false;\" />" +
+                    "<span class=\"input-group-addon alert-warning ValidationOK errRroducts\">*</span>" +
+                "</div>" +
             "</div>" +
-        "</div>" +
-        "<div class=\"col-xs-2 pull-right\" style=\"text-align:center;\">" +
-            "<button class=\"btn btn-primary Btn-Custom-Add \" onclick=\"addProducts(this);return false;\">ADD MORE</button>" +
-        "</div>" +
-    "</div>";
+            "<div class=\"col-xs-2\" style=\"padding: 0px; text-align:center;\">" +
+                "<div class=\"btn-group\" data-toggle=\"buttons\">" +
+                    "<label class=\"btn btn-default active\">" +
+                        "<input type=\"radio\" name=\"options\" id=\"product\" autocomplete=\"off\" checked>Product " +
+                    "</label> " +
+                    "<label class=\"btn btn-default\"> " +
+                        "<input type=\"radio\" name=\"options\" id=\"service\" autocomplete=\"off\"> Service " +
+                    "</label> " +
+                "</div> " +
+            "</div> " +
+            "<div class=\"col-xs-5\">" +
+                "<div class=\"col-xs-3\" style=\"font-size: smaller; text-align: center;\">CATALOGUE (OPTIONAL)</div>" +
+                "<div class=\"col-xs-9\">" +
+                    "<input type=\"file\" class=\"btn btn-default btn-file\" data-show-preview=\"false\" style=\"padding: 2px; text-align:right\" multiple accept=\".jpeg,.png,.jpg\" />" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-xs-1 pull-right\" style=\"text-align:center;\">" +
+                "<button class=\"btn btn-primary Btn-Custom-Add \" onclick=\"addProducts(this);return false;\">ADD MORE</button>" +
+            "</div>" +
+        "</div>";
     $(caller).text(' REMOVE ');
     $(caller).removeClass("Btn-Custom-Add");
     $(caller).addClass("Btn-Custom-Remove");
     $(caller).attr("onclick", "removeProducts(this)");
-    //$(caller).focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
     $("#productsContainer").append(content);
 }
 
@@ -253,65 +163,22 @@ function getDesignation(id) {
     return $("#" + id).find(".active").find("input").val().trim();
 }
 
-function sendProcessProducts(FormData) {
-    debugger;
-    var products = $("#productsContainer").find("input:text, input:file");
-    for (var i = 0; i < products.length; i++) {
-        var name;
-        if ($(products[i]).attr('class').includes("form-control")) {
-            name = $(products[i]).val();
-        }
-        else {
-            if (products[i].files.length > 0) {
-                for (var j = 0; j < products[i].files.length; j++) {
-                    console.log(products[i].files[j].name + " - " + products[i].files[j].size + " " + products[i].files[j].type);
-                    FormData.append("productImg-"+j, products[i].files[j]);  // not appending product file
-                    //FormData.append(name, name + "_" + products[i].files[j].name);
-                }
-            }
-            else {
-                FormData.append(name, "");
-            }
-        }
-    }
-    return FormData;
+function openNav() {
+    document.getElementById("overlay").style.width = "100%";
 }
 
-function PostData(URL, Data, Type) {
-    $.ajax
-    ({
-        type: "POST",
-        url: URL,
-        data: JSON.stringify(Data),
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            if (Type == "login") {
-                var json_obj = $.parseJSON(result.d);
-                if (json_obj["response"] == true) { redirect(json_obj["red"]); }
-                else
-                { $("#log_username_span").append("Wrong Username or Password").css("color", "red").css("font-weight", "bold").focus(true); }
-            }
-            if (Type == "create") {
-                if (result.d == true) { $("#reg_span_username").append("Registration Successful. Please verify your email.").css("color", "green").css("font-weight", "bold").focus(true); }
-                else
-                { $("#reg_span_username").append("<br />Sorry this Email is already registered.").css("color", "red").css("font-weight", "bold").focus(true); }
-            }
-            if (Type == "email") {
-                if (result.d == false) { $("#reg_span_email1").append("<br />This email address is already registered").css("font-weight", "bold").css("color", "red"); }
-            }
-        },
-        error: function (err) {
-        }
-    });
+function closeNav() {
+    document.getElementById("overlay").style.width = "0%";
 }
 
 function send() {
     if (validateFields()) {
+        //openNav();
         var
             orgName = $('#txtOrgName').val(),
             orgType = $("#ddlOrgType").multipleSelect("getSelects"),
             orgDOE = $('#txtOrgDOE').val(),
+            orgEmail = $('#txtOrgEmail').val(),
 
             orgHOAStreet = $("#txtOrgHOAStreet").val(),
             orgHOACity = $("#txtOrgHOACity").val(),
@@ -356,7 +223,7 @@ function send() {
 
         for (var i = 0; i < products.length; i++) {
             for (var j = 0; j < products[i].files.length; j++) {
-                fd.append($(products[i]).parent().parent().prev().first().children().children().first().val() + "_proFile_" + i, products[i].files[j]);
+                fd.append($(products[i]).parent().parent().prev().prev().first().children().children().first().val().replace(/ /g, '') + "_proFile_" + i, products[i].files[j]);
             }
         }
         if ($("#fupOrgContactRepresentative")[0].files.length > 0) {
@@ -370,6 +237,7 @@ function send() {
         fd.append("orgname", orgName);
         fd.append("orgtype", orgType);
         fd.append("orgdoe", orgDOE);
+        fd.append("orgemail", orgEmail);
         fd.append("orghoastreet", orgHOAStreet);
         fd.append("orghoacity", orgHOACity);
         fd.append("orghoathana", orgHOAThana);
@@ -399,14 +267,20 @@ function send() {
         fd.append("orgcontactrepresentativephone", orgContactRepresentativePhone);
         fd.append("orgcontactrepresentativeemail", orgContactRepresentativeEmail);
         fd.append("orgwebsite", orgWebsite);
+        var products = $("#productsContainer").find("input:text");
+
+        for (var i = 0; i < products.length; i++) {
+            fd.append("product" + i, ($(products[i]).val()));
+            fd.append("productType" + i, $(products[i]).parent().parent().next().find(".active").text().trim());
+        }
+
         $.ajax({
-            url: '/sif/SubmitAction',
+            url: 'sif/SubmitAction',
             data: fd,
             contentType: false,
             processData: false,
             type: 'POST',
             success: function (data) {
-                console.log(data);
                 window.location = "SIF/Success";
                 return true;
             }
@@ -415,6 +289,97 @@ function send() {
     }
     return false;
 }
+
+$(document).ready(function () {
+    //working fine
+    $("#ddlOrgType").multipleSelect({
+        onOpen: function () {
+            $("#errOrgType").text("*");
+            $("#txtOrgType").removeClass("alert-danger");
+        },
+        onClose: function () {
+            if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
+                $("#errOrgType").text("This Field Is Required.");
+                $("#txtOrgType").addClass("alert-danger");
+            }
+            else {
+                $("#errOrgType").text("*");
+                $("#txtOrgType").removeClass("alert-danger");
+            }
+        }
+    });
+
+    $("#bTypeAdd").click(function () {
+        var $select = $("#ddlOrgType"),
+            $input = $("#txtOrgType"),
+            $selected = $("#refreshSelected"),
+            value = $.trim($input.val()),
+            $opt = $("<option />", {
+                value: value,
+                text: " " + value
+            });
+        if (!value) {
+            $input.focus();
+            return;
+        }
+        $opt.prop("selected", true);
+        $input.val("");
+        $("#errOrgType").text("*");
+        $("#txtOrgType").removeClass("alert-danger");
+        $select.append($opt).multipleSelect("refresh");
+    });
+
+    $("#txtOrgName").focus();
+    regexPattern("alphabet", "#txtOrgName");
+    $("#txtOrgName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("alphabet", "#txtOrgType");
+    $("#txtOrgType").focusout(function () {
+        if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
+            $("#errOrgType").text("This Field Is Required.");
+            $("#txtOrgType").addClass("alert-danger");
+        }
+        else {
+            $("#errOrgType").text("*");
+            $("#txtOrgType").removeClass("alert-danger");
+        }
+    });
+    regexPattern("date", "#txtOrgDOE");
+    $("#txtOrgDOE").datepicker({
+        format: "dd/mm/yyyy"
+    });
+    $("#txtOrgDOE").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("email", "#txtOrgEmail");
+    $("#txtOrgEmail").focusout(function () { if (($(this).attr("class")).indexOf("danger") !== -1) { } else { validationOnFly("id", this, "id", $(this).next()); } });
+
+    regexPattern("address", "#txtOrgHOAStreet");
+    $("#txtOrgHOAStreet").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
+    regexPattern("alphabet&number", "#txtOrgHOACity");
+    $("#txtOrgHOACity").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
+    regexPattern("alphabet", "#txtOrgHOAThana");
+    $("#txtOrgHOAThana").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
+    regexPattern("alphabet", "#txtOrgHOACountry");
+    $("#txtOrgHOACountry").focusout(function () { validationOnFly("id", this, "id", "errOrgHOAStreet"); });
+    
+    regexPattern("alphabet", "#txtOrgContactPrimaryName");
+    $("#txtOrgContactPrimaryName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("number", "#txtOrgContactPrimaryPhone");
+    $("#txtOrgContactPrimaryPhone").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("email", "#txtOrgContactPrimaryEmail");
+    $("#txtOrgContactPrimaryEmail").focusout(function () { if (($(this).attr("class")).indexOf("danger") !== -1) { } else { validationOnFly("id", this, "id", $(this).next()); } });
+    
+    regexPattern("alphabet", "#txtOrgContactRepresentativeName");
+    $("#txtOrgContactRepresentativeName").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("number", "#txtOrgContactRepresentativePhone");
+    $("#txtOrgContactRepresentativePhone").focusout(function () { validationOnFly("id", this, "id", $(this).next()); });
+    regexPattern("email", "#txtOrgContactRepresentativeEmail");
+    $("#txtOrgContactRepresentativeEmail").focusout(function () { if (($(this).attr("class")).indexOf("danger") !== -1) { } else { validationOnFly("id", this, "id", $(this).next()); } });
+});
+
+
+
+
+
+
 
 function submitt() {
     var orgName = $('#txtOrgName').val();
@@ -443,6 +408,60 @@ function submitt() {
         }
     });
     return false;
+}
+
+function fieldValidation(fieldElementId, errorElementId) {
+    if ($("#" + fieldElementId).val().trim() == "") {
+        $("#" + errorElementId).text("This Field Is Required.");
+        $("html, body").animate({ scrollTop: $("#" + fieldElementId).offset().top - 60 }, "slow");
+        $("#" + fieldElementId).addClass("alert-danger");
+    }
+    else {
+        $("#" + errorElementId).text("*");
+        $("#" + fieldElementId).removeClass("alert-danger");
+    }
+}
+
+function fieldValidationDDL() {
+    if ($("#ddlOrgType").multipleSelect("getSelects") == "") {
+        $("#errOrgType").text("This Field Is Required.");
+        $("html, body").animate({ scrollTop: $("#ddlOrgType").offset().top - 60 }, "slow");
+        $("#txtOrgType").addClass("alert-danger");
+    }
+    else {
+        $("#errOrgType").text("*");
+        $("#errOrgType").removeClass("alert-danger");
+        $("#txtOrgType").removeClass("alert-danger");
+    }
+}
+
+function PostData(URL, Data, Type) {
+    $.ajax
+    ({
+        type: "POST",
+        url: URL,
+        data: JSON.stringify(Data),
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (Type == "login") {
+                var json_obj = $.parseJSON(result.d);
+                if (json_obj["response"] == true) { redirect(json_obj["red"]); }
+                else
+                { $("#log_username_span").append("Wrong Username or Password").css("color", "red").css("font-weight", "bold").focus(true); }
+            }
+            if (Type == "create") {
+                if (result.d == true) { $("#reg_span_username").append("Registration Successful. Please verify your email.").css("color", "green").css("font-weight", "bold").focus(true); }
+                else
+                { $("#reg_span_username").append("<br />Sorry this Email is already registered.").css("color", "red").css("font-weight", "bold").focus(true); }
+            }
+            if (Type == "email") {
+                if (result.d == false) { $("#reg_span_email1").append("<br />This email address is already registered").css("font-weight", "bold").css("color", "red"); }
+            }
+        },
+        error: function (err) {
+        }
+    });
 }
 
 //$(document).ready(function () {
@@ -488,9 +507,6 @@ function submitt() {
 //})
 //$("#txtOrgDOE").on("focusout", function () { fieldValidation("txtOrgDOE", "errOrgDOE"); });
 //});
-
-
-//var products = [[]];
 
 //var div = $("#productsContainer");
 //var pro = $(div).find("input:text, input:file");

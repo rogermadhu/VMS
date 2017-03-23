@@ -17,12 +17,65 @@
         border: 1px solid #c0c0c0 !important;
     }
     .Btn-Custom-Add{
-        padding: 6px 12px !important
+        padding: 5px 0px !important
     }
     .Btn-Custom-Remove{
-        padding: 6px 19px !important
+        padding: 5px 8px !important
     }
-    /* document.getElementsByClassName("ProductAdd"); */
+
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .overlay-content {
+        position: relative;
+        top: 25%;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+        color:white;
+        margin-top: 45px;
+    }
+
+    .overlay a {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 36px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .overlay a:hover, .overlay a:focus {
+        color: #f1f1f1;
+    }
+
+    .overlay .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+    }
+
+    @@media screen and (max-height: 450px) {
+        .overlay a {font-size: 20px}
+        .overlay .closebtn {
+        font-size: 40px;
+        margin-top: 45px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
 </style>
 
 <div class="jumbotron">
@@ -54,9 +107,9 @@
                             </div>
                             <div class="col-xs-3" style="padding-left: 0">
                                 <select id="ddlOrgType" multiple="multiple" style="width:100% !important">
-                                    <option value="manufacturer">&nbsp;Manufacturer</option>
-                                    <option value="trader">&nbsp;Trader</option>
-                                    <option value="serviceprovider">&nbsp;Service Provider</option>
+                                    <option value="EE9FB3FD-E4EB-4491-8B51-8AEF5DA6B5EB">&nbsp;Manufacturer</option>
+                                    <option value="7AC246C0-5EBD-415E-949D-3E1C57A0DFAD">&nbsp;Trader</option>
+                                    <option value="A64BE963-0E14-4F57-96DD-BA6371410CE0">&nbsp;Service Provider</option>
                                 </select>
                             </div>
                             <div class="col-xs-2" style="text-align:right; padding-right:0;">
@@ -82,6 +135,18 @@
                             <span class="input-group-addon" id="orgName">DATE OF ESTABLISHMENT</span>
                             <input class="form-control" id="txtOrgDOE" type="text">
                             <span class="input-group-addon alert-warning ValidationOK" id="errOrgDOE">*</span>
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgEmail">COMPANY EMAIL ADDRESS</span>
+                            <input class="form-control" id="txtOrgEmail" type="text">
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgEmail">*</span>
                         </div>
                     </p>
                 </div>
@@ -244,19 +309,29 @@
                         <div class="col-xs-1" style="padding: 3px 0 3px 0;">
                             <span class="input-group-addon borderMod" style="white-space: pre-wrap;">NAME</span>
                         </div>
-                        <div class="col-xs-4" style="padding: 0px;">
+                        <div class="col-xs-3" style="padding: 0px;">
                             <div class="input-group">
                                 <input class="col-sm-4 form-control" type="text" onblur="validationOnFlyCustom(this, $(this).next()); return false;" value="" />
                                 <span class="input-group-addon alert-warning ValidationOK">*</span>
                             </div>
                         </div>
+                        <div class="col-xs-2" style="padding: 0px; text-align:center;">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default active">
+                                    <input type="radio" name="options" id="product" autocomplete="off" checked>Product
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="options" id="service" autocomplete="off"> Service
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-xs-5">
                             <div class="col-xs-3" style="font-size: smaller; text-align: center;">CATALOGUE (OPTIONAL)</div>
                             <div class="col-xs-9">
-                                <input type="file" class="btn btn-default btn-file" data-show-preview="false" style="padding: 2px; text-align:right" accept=".jpeg,.png,.jpg,.pdf" /> @*HERE*@
+                                <input type="file" class="btn btn-default btn-file" data-show-preview="false" style="padding: 2px; text-align:right; max-width:110% !important" accept=".jpeg,.png,.jpg,.pdf" /> @*HERE*@
                             </div>
                         </div>
-                        <div class="col-xs-2 pull-right" style="text-align:center;">
+                        <div class="col-xs-1 pull-right" style="text-align:center;">
                             <button class="btn btn-primary Btn-Custom-Add" onclick="addProducts(this); return false;">&nbsp;ADD MORE</button>
                         </div>
                     </div>
@@ -468,4 +543,14 @@
         </div>
     </div>
 </form>
+<div id="overlay" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+        <h2>PLEASE WAIT</h2>
+        <h4>SUBMITTING DATA</h4>
+        <br />
+        <br />
+        <h4>DO NOT CLOSE INTERNET CONNECTION!</h4>
+    </div>
+</div>
 @Scripts.Render("~/bundles/sif")

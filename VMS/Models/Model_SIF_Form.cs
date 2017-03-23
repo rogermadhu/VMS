@@ -12,6 +12,7 @@ namespace VMS.Models
         private string vendorName;
         private DateTime doe;
         private string website;
+        private string email;
 
         public string VendorName
         {
@@ -49,15 +50,27 @@ namespace VMS.Models
                 website = value;
             }
         }
-        
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
         public string InsertVendor(Vendor_SIF_Form vendor)
         {
             string vendorGUID = string.Empty;
             try
             {
                 string query =
-                    @"INSERT INTO VENDOR (VENDOR_NAME, DATE_OF_ESTABLISHMENT, WEBSITE) 
-                    VALUES ('" + vendor.vendorName + "', CAST('" + vendor.Doe + "' AS DATE), '" + vendor.website + "'); " +
+                    @"INSERT INTO VENDOR (VENDOR_NAME, DATE_OF_ESTABLISHMENT, WEBSITE, EMAIL, USERNAME) 
+                    VALUES ('" + vendor.vendorName + "', CAST('" + vendor.Doe + "' AS DATE), '" + vendor.website + "','"+ vendor.email + "','" + vendor.email + "'); " +
                     "SELECT VENDOR_GUID FROM VENDOR WHERE VENDOR_ID = SCOPE_IDENTITY();";
                 vendorGUID = db.GetDataTable(query).Rows[0].ItemArray[0].ToString();
             }
@@ -245,7 +258,7 @@ namespace VMS.Models
             {
                 string query =
                     @"INSERT INTO VENDOR_ADDRESS_MAP (VENDOR_GUID, VA_TYPE_GUID, STREET_ADDRESS, CITY, THANA, COUNTRY) 
-                    VALUES ('" + factory.vendorGUID + "', '8F7F51E7-B55B-409E-9353-35BC4C2D6AB3', '" + factory.streetAddress + "', '" + factory.city + "', '" + factory.thana + "', '" + factory.country + "')";
+                    VALUES ('" + factory.vendorGUID + "', '07005AC7-861E-480E-9C71-E016FF18175C', '" + factory.streetAddress + "', '" + factory.city + "', '" + factory.thana + "', '" + factory.country + "')";
                 db.ExecuteNonQuery(query);
             }
             catch (Exception ex)
@@ -500,612 +513,862 @@ namespace VMS.Models
             return flag;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //public class Model_SIF_Form
-    //{
-    //    private string vendor_name;
-    //    private DateTime date_of_establishment;
-    //    private string website;
-    //    private IList<TOB_MAP> tob;
-    //    private IList<VADDRESS> vaddress;
-    //    private IList<PRODUCT> product;
-    //    private IList<PRODUCT_CATALOGUE> catalogue;
-    //    private IList<CONTACT_PERSON> contact;
-    //    private IList<VCARD> vcard;
-    //}
-    //public class TOB_MAP
-    //{
-    //    private string vendor_guid;
-    //    private string tob_guid;
-    //    private string other_name;
-    //    private string is_other;
-
-    //    public string Vendor_guid
-    //    {
-    //        get
-    //        {
-    //            return vendor_guid;
-    //        }
-
-    //        set
-    //        {
-    //            vendor_guid = value;
-    //        }
-    //    }
-    //    public string Tob_guid
-    //    {
-    //        get
-    //        {
-    //            return tob_guid;
-    //        }
-
-    //        set
-    //        {
-    //            tob_guid = value;
-    //        }
-    //    }
-    //    public string Other_name
-    //    {
-    //        get
-    //        {
-    //            return other_name;
-    //        }
-
-    //        set
-    //        {
-    //            other_name = value;
-    //        }
-    //    }
-    //    public string Is_other
-    //    {
-    //        get
-    //        {
-    //            return is_other;
-    //        }
-
-    //        set
-    //        {
-    //            is_other = value;
-    //        }
-    //    }
-    //    public string Insert_TOB_MAP(TOB_MAP tob)
-    //    {
-    //        string query = "INSERT INTO ";
-
-    //        DatabaseMSSQL db = new DatabaseMSSQL();
-    //        return db.getSingleValue(query).ToString();
-            
-    //    }
-    //}
-    //public class VADDRESS
-    //{
-    //    private string vendor_guid;
-    //    private string va_type_guid;
-    //    private string street_address;
-    //    private string city;
-    //    private string state;
-    //    private string country;
-    //    private string zip;
-
-    //    public string Vendor_guid
-    //    {
-    //        get
-    //        {
-    //            return vendor_guid;
-    //        }
-
-    //        set
-    //        {
-    //            vendor_guid = value;
-    //        }
-    //    }
-    //    public string Va_type_guid
-    //    {
-    //        get
-    //        {
-    //            return va_type_guid;
-    //        }
-
-    //        set
-    //        {
-    //            va_type_guid = value;
-    //        }
-    //    }
-    //    public string Street_address
-    //    {
-    //        get
-    //        {
-    //            return street_address;
-    //        }
-
-    //        set
-    //        {
-    //            street_address = value;
-    //        }
-    //    }
-    //    public string City
-    //    {
-    //        get
-    //        {
-    //            return city;
-    //        }
-
-    //        set
-    //        {
-    //            city = value;
-    //        }
-    //    }
-    //    public string State
-    //    {
-    //        get
-    //        {
-    //            return state;
-    //        }
-
-    //        set
-    //        {
-    //            state = value;
-    //        }
-    //    }
-    //    public string Country
-    //    {
-    //        get
-    //        {
-    //            return country;
-    //        }
-
-    //        set
-    //        {
-    //            country = value;
-    //        }
-    //    }
-    //    public string Zip
-    //    {
-    //        get
-    //        {
-    //            return zip;
-    //        }
-
-    //        set
-    //        {
-    //            zip = value;
-    //        }
-    //    }
-    //}
-    //public class PRODUCT
-    //{
-    //    private string vendor_guid;
-    //    private string product_name;
-    //    private string descripton;
-    //    private string product_category_guid;
-    //    private char is_service;
-    //    private char is_obsolete;
-    //    private char is_active;
-    //    private char is_own_production;
-    //    private DateTime create_date;
-    //    private string create_by;
-
-    //    public string Vendor_guid
-    //    {
-    //        get
-    //        {
-    //            return vendor_guid;
-    //        }
-
-    //        set
-    //        {
-    //            vendor_guid = value;
-    //        }
-    //    }
-    //    public string Product_name
-    //    {
-    //        get
-    //        {
-    //            return product_name;
-    //        }
-
-    //        set
-    //        {
-    //            product_name = value;
-    //        }
-    //    }
-    //    public string Descripton
-    //    {
-    //        get
-    //        {
-    //            return descripton;
-    //        }
-
-    //        set
-    //        {
-    //            descripton = value;
-    //        }
-    //    }
-    //    public string Product_category_guid
-    //    {
-    //        get
-    //        {
-    //            return product_category_guid;
-    //        }
-
-    //        set
-    //        {
-    //            product_category_guid = value;
-    //        }
-    //    }
-    //    public char Is_service
-    //    {
-    //        get
-    //        {
-    //            return is_service;
-    //        }
-
-    //        set
-    //        {
-    //            is_service = value;
-    //        }
-    //    }
-    //    public char Is_obsolete
-    //    {
-    //        get
-    //        {
-    //            return is_obsolete;
-    //        }
-
-    //        set
-    //        {
-    //            is_obsolete = value;
-    //        }
-    //    }
-    //    public char Is_active
-    //    {
-    //        get
-    //        {
-    //            return is_active;
-    //        }
-
-    //        set
-    //        {
-    //            is_active = value;
-    //        }
-    //    }
-    //    public char Is_own_production
-    //    {
-    //        get
-    //        {
-    //            return is_own_production;
-    //        }
-
-    //        set
-    //        {
-    //            is_own_production = value;
-    //        }
-    //    }
-    //    public DateTime Create_date
-    //    {
-    //        get
-    //        {
-    //            return create_date;
-    //        }
-
-    //        set
-    //        {
-    //            create_date = value;
-    //        }
-    //    }
-    //    public string Create_by
-    //    {
-    //        get
-    //        {
-    //            return create_by;
-    //        }
-
-    //        set
-    //        {
-    //            create_by = value;
-    //        }
-    //    }
-    //}
-    //public class PRODUCT_CATALOGUE
-    //{
-    //    private string product_guid;
-    //    private string file_name_uploaded;
-    //    private string file_extention;
-    //    private string file_renamed;
-    //    private string file_saved_root_path;
-    //    private string file_saved_absolute_path;
-    //    private DateTime date_uploaded;
-
-    //    public string Product_guid
-    //    {
-    //        get
-    //        {
-    //            return product_guid;
-    //        }
-
-    //        set
-    //        {
-    //            product_guid = value;
-    //        }
-    //    }
-    //    public string File_name_uploaded
-    //    {
-    //        get
-    //        {
-    //            return file_name_uploaded;
-    //        }
-
-    //        set
-    //        {
-    //            file_name_uploaded = value;
-    //        }
-    //    }
-    //    public string File_extention
-    //    {
-    //        get
-    //        {
-    //            return file_extention;
-    //        }
-
-    //        set
-    //        {
-    //            file_extention = value;
-    //        }
-    //    }
-    //    public string File_renamed
-    //    {
-    //        get
-    //        {
-    //            return file_renamed;
-    //        }
-
-    //        set
-    //        {
-    //            file_renamed = value;
-    //        }
-    //    }
-    //    public string File_saved_root_path
-    //    {
-    //        get
-    //        {
-    //            return file_saved_root_path;
-    //        }
-
-    //        set
-    //        {
-    //            file_saved_root_path = value;
-    //        }
-    //    }
-    //    public string File_saved_absolute_path
-    //    {
-    //        get
-    //        {
-    //            return file_saved_absolute_path;
-    //        }
-
-    //        set
-    //        {
-    //            file_saved_absolute_path = value;
-    //        }
-    //    }
-    //    public DateTime Date_uploaded
-    //    {
-    //        get
-    //        {
-    //            return date_uploaded;
-    //        }
-
-    //        set
-    //        {
-    //            date_uploaded = value;
-    //        }
-    //    }
-    //}
-    //public class CONTACT_PERSON
-    //{
-    //    private string vendor_guid;
-    //    private string designation_guid;
-    //    private string vcp_name;
-    //    private Int64 tel_no;
-    //    private Int64 cell_no;
-    //    private string email;
-    //    private char is_poc;
-    //    private string create_by;
-
-    //    public string Vendor_guid
-    //    {
-    //        get
-    //        {
-    //            return vendor_guid;
-    //        }
-
-    //        set
-    //        {
-    //            vendor_guid = value;
-    //        }
-    //    }
-    //    public string Designation_guid
-    //    {
-    //        get
-    //        {
-    //            return designation_guid;
-    //        }
-
-    //        set
-    //        {
-    //            designation_guid = value;
-    //        }
-    //    }
-    //    public string Vcp_name
-    //    {
-    //        get
-    //        {
-    //            return vcp_name;
-    //        }
-
-    //        set
-    //        {
-    //            vcp_name = value;
-    //        }
-    //    }
-    //    public long Tel_no
-    //    {
-    //        get
-    //        {
-    //            return tel_no;
-    //        }
-
-    //        set
-    //        {
-    //            tel_no = value;
-    //        }
-    //    }
-    //    public long Cell_no
-    //    {
-    //        get
-    //        {
-    //            return cell_no;
-    //        }
-
-    //        set
-    //        {
-    //            cell_no = value;
-    //        }
-    //    }
-    //    public string Email
-    //    {
-    //        get
-    //        {
-    //            return email;
-    //        }
-
-    //        set
-    //        {
-    //            email = value;
-    //        }
-    //    }
-    //    public char Is_poc
-    //    {
-    //        get
-    //        {
-    //            return is_poc;
-    //        }
-
-    //        set
-    //        {
-    //            is_poc = value;
-    //        }
-    //    }
-    //    public string Create_by
-    //    {
-    //        get
-    //        {
-    //            return create_by;
-    //        }
-
-    //        set
-    //        {
-    //            create_by = value;
-    //        }
-    //    }
-    //}
-    //public class VCARD
-    //{
-    //    private string vcp_guid;
-    //    private string file_name_uploaded;
-    //    private string file_extention;
-    //    private string file_renamed;
-    //    private string file_saved_root_path;
-    //    private string file_saved_absolute_path;
-
-    //    public string Vcp_guid
-    //    {
-    //        get
-    //        {
-    //            return vcp_guid;
-    //        }
-
-    //        set
-    //        {
-    //            vcp_guid = value;
-    //        }
-    //    }
-    //    public string File_name_uploaded
-    //    {
-    //        get
-    //        {
-    //            return file_name_uploaded;
-    //        }
-
-    //        set
-    //        {
-    //            file_name_uploaded = value;
-    //        }
-    //    }
-    //    public string File_extention
-    //    {
-    //        get
-    //        {
-    //            return file_extention;
-    //        }
-
-    //        set
-    //        {
-    //            file_extention = value;
-    //        }
-    //    }
-    //    public string File_renamed
-    //    {
-    //        get
-    //        {
-    //            return file_renamed;
-    //        }
-
-    //        set
-    //        {
-    //            file_renamed = value;
-    //        }
-    //    }
-    //    public string File_saved_root_path
-    //    {
-    //        get
-    //        {
-    //            return file_saved_root_path;
-    //        }
-
-    //        set
-    //        {
-    //            file_saved_root_path = value;
-    //        }
-    //    }
-    //    public string File_saved_absolute_path
-    //    {
-    //        get
-    //        {
-    //            return file_saved_absolute_path;
-    //        }
-
-    //        set
-    //        {
-    //            file_saved_absolute_path = value;
-    //        }
-    //    }
-    //}
-}
+    public class VCard
+    {
+        DatabaseMSSQL db = new DatabaseMSSQL();
+
+        private string vendorGuid;
+        private string vcpName;
+        private string fileNameUploaded;
+        private string fileExtention;
+        private string fileRenamed;
+        private string fileSavedRootPath;
+        private string fileSavedAbsolutePath;
+        #region "setter"
+        public string VendorGuid
+        {
+            get
+            {
+                return vendorGuid;
+            }
+
+            set
+            {
+                vendorGuid = value;
+            }
+        }
+        public string VcpName
+        {
+            get
+            {
+                return vcpName;
+            }
+
+            set
+            {
+                vcpName = value;
+            }
+        }
+        public string FileNameUploaded
+        {
+            get
+            {
+                return fileNameUploaded;
+            }
+
+            set
+            {
+                fileNameUploaded = value;
+            }
+        }
+        public string FileExtention
+        {
+            get
+            {
+                return fileExtention;
+            }
+
+            set
+            {
+                fileExtention = value;
+            }
+        }
+        public string FileRenamed
+        {
+            get
+            {
+                return fileRenamed;
+            }
+
+            set
+            {
+                fileRenamed = value;
+            }
+        }
+        public string FileSavedRootPath
+        {
+            get
+            {
+                return fileSavedRootPath;
+            }
+
+            set
+            {
+                fileSavedRootPath = value;
+            }
+        }
+        public string FileSavedAbsolutePath
+        {
+            get
+            {
+                return fileSavedAbsolutePath;
+            }
+
+            set
+            {
+                fileSavedAbsolutePath = value;
+            }
+        }
+        #endregion "setter"
+
+        public void InsertVCard()
+        {
+            string query =
+                @"DECLARE @name NVARCHAR(50) = '"+ vcpName + @"'
+                DECLARE @vendorGuid VARCHAR(36) = '"+ vendorGuid + @"'
+                DECLARE @vcpGuid VARCHAR(36)
+
+                SET @vcpGuid = (SELECT
+	                VCP.VCP_GUID
+                FROM
+	                VENDOR V 
+	                LEFT JOIN VENDOR_CONTACT_PERSON VCP ON V.VENDOR_GUID = VCP.VENDOR_GUID
+                WHERE 
+	                V.VENDOR_GUID = @vendorGuid 
+	                AND	REPLACE(LTRIM(RTRIM(VCP.VCP_NAME)), ' ' , '') = @name)
+
+                IF(EXISTS(SELECT * FROM VENDOR_CONTACT_PERSON_VCARD WHERE VCP_GUID = @vcpGuid))
+                BEGIN
+	                UPDATE VENDOR_CONTACT_PERSON_VCARD SET IS_ACTIVE = 'N' WHERE VCP_GUID = @vcpGuid
+
+	                INSERT INTO VENDOR_CONTACT_PERSON_VCARD 
+	                (VCP_GUID, FILE_NAME_UPLOADED, FILE_EXTENTION, FILE_RENAMED, FILE_SAVED_ROOT_PATH, FILE_SAVED_ABSOLUTE_PATH)
+	                VALUES
+	                (@vcpGuid, 'FILE_NAME_UPLOADED', 'FILE_EXTENTION', 'FILE_RENAMED', 'FILE_SAVED_ROOT_PATH', 'FILE_SAVED_ABSOLUTE_PATH')
+                END
+                ELSE
+                BEGIN
+	                INSERT INTO VENDOR_CONTACT_PERSON_VCARD 
+	                (VCP_GUID, FILE_NAME_UPLOADED, FILE_EXTENTION, FILE_RENAMED, FILE_SAVED_ROOT_PATH, FILE_SAVED_ABSOLUTE_PATH)
+	                VALUES
+	                (@vcpGuid, '"+ fileNameUploaded + @"', '"+ fileExtention + @"', '"+ fileRenamed + @"', '"+ fileSavedRootPath + @"', '"+ fileSavedAbsolutePath + @"')
+                END";
+            db.ExecuteNonQuery(query);
+        }
+    }
+    public class PImage
+    {
+        DatabaseMSSQL db = new DatabaseMSSQL();
+
+        private string vendorGuid;
+        private string pName;
+        private string fileNameUploaded;
+        private string fileExtention;
+        private string fileRenamed;
+        private string fileSavedRootPath;
+        private string fileSavedAbsolutePath;
+        #region "setter"
+        public string VendorGuid
+        {
+            get
+            {
+                return vendorGuid;
+            }
+
+            set
+            {
+                vendorGuid = value;
+            }
+        }
+        public string PName
+        {
+            get
+            {
+                return pName;
+            }
+
+            set
+            {
+                pName = value;
+            }
+        }
+        public string FileNameUploaded
+        {
+            get
+            {
+                return fileNameUploaded;
+            }
+
+            set
+            {
+                fileNameUploaded = value;
+            }
+        }
+        public string FileExtention
+        {
+            get
+            {
+                return fileExtention;
+            }
+
+            set
+            {
+                fileExtention = value;
+            }
+        }
+        public string FileRenamed
+        {
+            get
+            {
+                return fileRenamed;
+            }
+
+            set
+            {
+                fileRenamed = value;
+            }
+        }
+        public string FileSavedRootPath
+        {
+            get
+            {
+                return fileSavedRootPath;
+            }
+
+            set
+            {
+                fileSavedRootPath = value;
+            }
+        }
+        public string FileSavedAbsolutePath
+        {
+            get
+            {
+                return fileSavedAbsolutePath;
+            }
+
+            set
+            {
+                fileSavedAbsolutePath = value;
+            }
+        }
+        #endregion "setter"
+
+        public void InsertProductImage()
+        {
+            string query =
+                @"DECLARE @pname NVARCHAR(50) = '" + pName + @"'
+                DECLARE @vendorGuid VARCHAR(36) = '" + vendorGuid + @"'
+                DECLARE @pGuid VARCHAR(36)
+
+                SET @pGuid = (SELECT
+				                p.PRODUCT_GUID
+			                FROM
+				                VENDOR V 
+				                LEFT JOIN PRODUCT_MAP P ON V.VENDOR_GUID = P.VENDOR_GUID
+				                LEFT JOIN PRODUCT_CATALOGUE_IMAGE_MAP pc ON p.PRODUCT_GUID = pc.PRODUCT_GUID
+			                WHERE 
+				                V.VENDOR_GUID = @vendorGuid 
+				                AND	REPLACE(LTRIM(RTRIM(p.PRODUCT_NAME)), ' ' , '') = @pname)
+
+                INSERT INTO PRODUCT_CATALOGUE_IMAGE_MAP 
+                (PRODUCT_GUID, FILE_NAME_UPLOADED, FILE_EXTENTION, FILE_RENAMED, FILE_SAVED_ROOT_PATH, FILE_SAVED_ABSOLUTE_PATH)
+                VALUES
+                (@pGuid, '" + fileNameUploaded + @"', '" + fileExtention + @"', '" + fileRenamed + @"', '" + fileSavedRootPath + @"', '" + fileSavedAbsolutePath + @"')";
+            db.ExecuteNonQuery(query);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+        //public class Model_SIF_Form
+        //{
+        //    private string vendor_name;
+        //    private DateTime date_of_establishment;
+        //    private string website;
+        //    private IList<TOB_MAP> tob;
+        //    private IList<VADDRESS> vaddress;
+        //    private IList<PRODUCT> product;
+        //    private IList<PRODUCT_CATALOGUE> catalogue;
+        //    private IList<CONTACT_PERSON> contact;
+        //    private IList<VCARD> vcard;
+        //}
+        //public class TOB_MAP
+        //{
+        //    private string vendor_guid;
+        //    private string tob_guid;
+        //    private string other_name;
+        //    private string is_other;
+
+        //    public string Vendor_guid
+        //    {
+        //        get
+        //        {
+        //            return vendor_guid;
+        //        }
+
+        //        set
+        //        {
+        //            vendor_guid = value;
+        //        }
+        //    }
+        //    public string Tob_guid
+        //    {
+        //        get
+        //        {
+        //            return tob_guid;
+        //        }
+
+        //        set
+        //        {
+        //            tob_guid = value;
+        //        }
+        //    }
+        //    public string Other_name
+        //    {
+        //        get
+        //        {
+        //            return other_name;
+        //        }
+
+        //        set
+        //        {
+        //            other_name = value;
+        //        }
+        //    }
+        //    public string Is_other
+        //    {
+        //        get
+        //        {
+        //            return is_other;
+        //        }
+
+        //        set
+        //        {
+        //            is_other = value;
+        //        }
+        //    }
+        //    public string Insert_TOB_MAP(TOB_MAP tob)
+        //    {
+        //        string query = "INSERT INTO ";
+
+        //        DatabaseMSSQL db = new DatabaseMSSQL();
+        //        return db.getSingleValue(query).ToString();
+
+        //    }
+        //}
+        //public class VADDRESS
+        //{
+        //    private string vendor_guid;
+        //    private string va_type_guid;
+        //    private string street_address;
+        //    private string city;
+        //    private string state;
+        //    private string country;
+        //    private string zip;
+
+        //    public string Vendor_guid
+        //    {
+        //        get
+        //        {
+        //            return vendor_guid;
+        //        }
+
+        //        set
+        //        {
+        //            vendor_guid = value;
+        //        }
+        //    }
+        //    public string Va_type_guid
+        //    {
+        //        get
+        //        {
+        //            return va_type_guid;
+        //        }
+
+        //        set
+        //        {
+        //            va_type_guid = value;
+        //        }
+        //    }
+        //    public string Street_address
+        //    {
+        //        get
+        //        {
+        //            return street_address;
+        //        }
+
+        //        set
+        //        {
+        //            street_address = value;
+        //        }
+        //    }
+        //    public string City
+        //    {
+        //        get
+        //        {
+        //            return city;
+        //        }
+
+        //        set
+        //        {
+        //            city = value;
+        //        }
+        //    }
+        //    public string State
+        //    {
+        //        get
+        //        {
+        //            return state;
+        //        }
+
+        //        set
+        //        {
+        //            state = value;
+        //        }
+        //    }
+        //    public string Country
+        //    {
+        //        get
+        //        {
+        //            return country;
+        //        }
+
+        //        set
+        //        {
+        //            country = value;
+        //        }
+        //    }
+        //    public string Zip
+        //    {
+        //        get
+        //        {
+        //            return zip;
+        //        }
+
+        //        set
+        //        {
+        //            zip = value;
+        //        }
+        //    }
+        //}
+        //public class PRODUCT
+        //{
+        //    private string vendor_guid;
+        //    private string product_name;
+        //    private string descripton;
+        //    private string product_category_guid;
+        //    private char is_service;
+        //    private char is_obsolete;
+        //    private char is_active;
+        //    private char is_own_production;
+        //    private DateTime create_date;
+        //    private string create_by;
+
+        //    public string Vendor_guid
+        //    {
+        //        get
+        //        {
+        //            return vendor_guid;
+        //        }
+
+        //        set
+        //        {
+        //            vendor_guid = value;
+        //        }
+        //    }
+        //    public string Product_name
+        //    {
+        //        get
+        //        {
+        //            return product_name;
+        //        }
+
+        //        set
+        //        {
+        //            product_name = value;
+        //        }
+        //    }
+        //    public string Descripton
+        //    {
+        //        get
+        //        {
+        //            return descripton;
+        //        }
+
+        //        set
+        //        {
+        //            descripton = value;
+        //        }
+        //    }
+        //    public string Product_category_guid
+        //    {
+        //        get
+        //        {
+        //            return product_category_guid;
+        //        }
+
+        //        set
+        //        {
+        //            product_category_guid = value;
+        //        }
+        //    }
+        //    public char Is_service
+        //    {
+        //        get
+        //        {
+        //            return is_service;
+        //        }
+
+        //        set
+        //        {
+        //            is_service = value;
+        //        }
+        //    }
+        //    public char Is_obsolete
+        //    {
+        //        get
+        //        {
+        //            return is_obsolete;
+        //        }
+
+        //        set
+        //        {
+        //            is_obsolete = value;
+        //        }
+        //    }
+        //    public char Is_active
+        //    {
+        //        get
+        //        {
+        //            return is_active;
+        //        }
+
+        //        set
+        //        {
+        //            is_active = value;
+        //        }
+        //    }
+        //    public char Is_own_production
+        //    {
+        //        get
+        //        {
+        //            return is_own_production;
+        //        }
+
+        //        set
+        //        {
+        //            is_own_production = value;
+        //        }
+        //    }
+        //    public DateTime Create_date
+        //    {
+        //        get
+        //        {
+        //            return create_date;
+        //        }
+
+        //        set
+        //        {
+        //            create_date = value;
+        //        }
+        //    }
+        //    public string Create_by
+        //    {
+        //        get
+        //        {
+        //            return create_by;
+        //        }
+
+        //        set
+        //        {
+        //            create_by = value;
+        //        }
+        //    }
+        //}
+        //public class PRODUCT_CATALOGUE
+        //{
+        //    private string product_guid;
+        //    private string file_name_uploaded;
+        //    private string file_extention;
+        //    private string file_renamed;
+        //    private string file_saved_root_path;
+        //    private string file_saved_absolute_path;
+        //    private DateTime date_uploaded;
+
+        //    public string Product_guid
+        //    {
+        //        get
+        //        {
+        //            return product_guid;
+        //        }
+
+        //        set
+        //        {
+        //            product_guid = value;
+        //        }
+        //    }
+        //    public string File_name_uploaded
+        //    {
+        //        get
+        //        {
+        //            return file_name_uploaded;
+        //        }
+
+        //        set
+        //        {
+        //            file_name_uploaded = value;
+        //        }
+        //    }
+        //    public string File_extention
+        //    {
+        //        get
+        //        {
+        //            return file_extention;
+        //        }
+
+        //        set
+        //        {
+        //            file_extention = value;
+        //        }
+        //    }
+        //    public string File_renamed
+        //    {
+        //        get
+        //        {
+        //            return file_renamed;
+        //        }
+
+        //        set
+        //        {
+        //            file_renamed = value;
+        //        }
+        //    }
+        //    public string File_saved_root_path
+        //    {
+        //        get
+        //        {
+        //            return file_saved_root_path;
+        //        }
+
+        //        set
+        //        {
+        //            file_saved_root_path = value;
+        //        }
+        //    }
+        //    public string File_saved_absolute_path
+        //    {
+        //        get
+        //        {
+        //            return file_saved_absolute_path;
+        //        }
+
+        //        set
+        //        {
+        //            file_saved_absolute_path = value;
+        //        }
+        //    }
+        //    public DateTime Date_uploaded
+        //    {
+        //        get
+        //        {
+        //            return date_uploaded;
+        //        }
+
+        //        set
+        //        {
+        //            date_uploaded = value;
+        //        }
+        //    }
+        //}
+        //public class CONTACT_PERSON
+        //{
+        //    private string vendor_guid;
+        //    private string designation_guid;
+        //    private string vcp_name;
+        //    private Int64 tel_no;
+        //    private Int64 cell_no;
+        //    private string email;
+        //    private char is_poc;
+        //    private string create_by;
+
+        //    public string Vendor_guid
+        //    {
+        //        get
+        //        {
+        //            return vendor_guid;
+        //        }
+
+        //        set
+        //        {
+        //            vendor_guid = value;
+        //        }
+        //    }
+        //    public string Designation_guid
+        //    {
+        //        get
+        //        {
+        //            return designation_guid;
+        //        }
+
+        //        set
+        //        {
+        //            designation_guid = value;
+        //        }
+        //    }
+        //    public string Vcp_name
+        //    {
+        //        get
+        //        {
+        //            return vcp_name;
+        //        }
+
+        //        set
+        //        {
+        //            vcp_name = value;
+        //        }
+        //    }
+        //    public long Tel_no
+        //    {
+        //        get
+        //        {
+        //            return tel_no;
+        //        }
+
+        //        set
+        //        {
+        //            tel_no = value;
+        //        }
+        //    }
+        //    public long Cell_no
+        //    {
+        //        get
+        //        {
+        //            return cell_no;
+        //        }
+
+        //        set
+        //        {
+        //            cell_no = value;
+        //        }
+        //    }
+        //    public string Email
+        //    {
+        //        get
+        //        {
+        //            return email;
+        //        }
+
+        //        set
+        //        {
+        //            email = value;
+        //        }
+        //    }
+        //    public char Is_poc
+        //    {
+        //        get
+        //        {
+        //            return is_poc;
+        //        }
+
+        //        set
+        //        {
+        //            is_poc = value;
+        //        }
+        //    }
+        //    public string Create_by
+        //    {
+        //        get
+        //        {
+        //            return create_by;
+        //        }
+
+        //        set
+        //        {
+        //            create_by = value;
+        //        }
+        //    }
+        //}
+        //public class VCARD
+        //{
+        //    private string vcp_guid;
+        //    private string file_name_uploaded;
+        //    private string file_extention;
+        //    private string file_renamed;
+        //    private string file_saved_root_path;
+        //    private string file_saved_absolute_path;
+
+        //    public string Vcp_guid
+        //    {
+        //        get
+        //        {
+        //            return vcp_guid;
+        //        }
+
+        //        set
+        //        {
+        //            vcp_guid = value;
+        //        }
+        //    }
+        //    public string File_name_uploaded
+        //    {
+        //        get
+        //        {
+        //            return file_name_uploaded;
+        //        }
+
+        //        set
+        //        {
+        //            file_name_uploaded = value;
+        //        }
+        //    }
+        //    public string File_extention
+        //    {
+        //        get
+        //        {
+        //            return file_extention;
+        //        }
+
+        //        set
+        //        {
+        //            file_extention = value;
+        //        }
+        //    }
+        //    public string File_renamed
+        //    {
+        //        get
+        //        {
+        //            return file_renamed;
+        //        }
+
+        //        set
+        //        {
+        //            file_renamed = value;
+        //        }
+        //    }
+        //    public string File_saved_root_path
+        //    {
+        //        get
+        //        {
+        //            return file_saved_root_path;
+        //        }
+
+        //        set
+        //        {
+        //            file_saved_root_path = value;
+        //        }
+        //    }
+        //    public string File_saved_absolute_path
+        //    {
+        //        get
+        //        {
+        //            return file_saved_absolute_path;
+        //        }
+
+        //        set
+        //        {
+        //            file_saved_absolute_path = value;
+        //        }
+        //    }
+        //}
+    }
 
 //Organization Name           VENDOR
 //Date of Establishment           VENDOR

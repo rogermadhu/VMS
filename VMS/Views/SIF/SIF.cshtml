@@ -107,9 +107,9 @@
                             </div>
                             <div class="col-xs-3" style="padding-left: 0">
                                 <select id="ddlOrgType" multiple="multiple" style="width:100% !important">
-                                    <option value="EE9FB3FD-E4EB-4491-8B51-8AEF5DA6B5EB">&nbsp;Manufacturer</option>
-                                    <option value="7AC246C0-5EBD-415E-949D-3E1C57A0DFAD">&nbsp;Trader</option>
-                                    <option value="A64BE963-0E14-4F57-96DD-BA6371410CE0">&nbsp;Service Provider</option>
+                                    <option value="Manufacturer">&nbsp;Manufacturer</option>
+                                    <option value="Trader">&nbsp;Trader</option>
+                                    <option value="Service Provider">&nbsp;Service Provider</option>
                                 </select>
                             </div>
                             <div class="col-xs-2" style="text-align:right; padding-right:0;">
@@ -135,6 +135,18 @@
                             <span class="input-group-addon" id="orgName">DATE OF ESTABLISHMENT</span>
                             <input class="form-control" id="txtOrgDOE" type="text">
                             <span class="input-group-addon alert-warning ValidationOK" id="errOrgDOE">*</span>
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="orgEmail">COMPANY EMAIL ADDRESS</span>
+                            <input class="form-control" id="txtOrgEmail" type="text">
+                            <span class="input-group-addon alert-warning ValidationOK" id="errOrgEmail">*</span>
                         </div>
                     </p>
                 </div>
@@ -534,11 +546,13 @@
 <div id="overlay" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="overlay-content">
-        <h2>PLEASE WAIT</h2>
-        <h4>SUBMITTING DATA</h4>
-        <br />
-        <br />
-        <h4>DO NOT CLOSE INTERNET CONNECTION!</h4>
+        <div id="msg">
+            <h2>PLEASE WAIT</h2>
+            <h4>SUBMITTING DATA</h4>
+            <br />
+            <br />
+            <h4>DO NOT CLOSE INTERNET CONNECTION!</h4>
+        </div>
     </div>
 </div>
 @Scripts.Render("~/bundles/sif")

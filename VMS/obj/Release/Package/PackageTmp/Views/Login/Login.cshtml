@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    input {
+        max-width: none !important;
+    }
+    .ValidationOK {
+        color:red;
+    }
+</style>
+<form id="form" method="post" enctype="multipart/form-data">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 hid">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center" style="margin-bottom: -10px">
+                        <h3 class="well">Login</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <span id="msg" class="ValidationOK" style="font-size:medium"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <div class="input-group">
+                            <input id="log_username" type="text" class="form-control" placeholder="Login ID" required />
+                            <span class="input-group-addon alert-warning ValidationOK" id="errLogin">*</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <div class="input-group">
+                            <input id="log_password" type="password" class="form-control" placeholder="Password" required />
+                            <span class="input-group-addon alert-warning ValidationOK" id="errPassword">*</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <input id="submit" type="button" class="btn btn-primary" value="SUBMIT" style="width:100%;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@Scripts.Render("~/Scripts/login.min.js")

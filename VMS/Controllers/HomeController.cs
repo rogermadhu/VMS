@@ -10,6 +10,9 @@ namespace VMS.Controllers
     {
         public ActionResult Index()
         {
+            //App_Code.MailHelper mh = new App_Code.MailHelper();
+            //mh.TestEmailTemplate("roger.shubho@fdl.com.bd", "temp id", "roger", "pwd");
+
             return View();
         }
 

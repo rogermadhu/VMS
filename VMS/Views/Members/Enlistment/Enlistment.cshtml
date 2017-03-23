@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon">Email Address:</span>
@@ -80,7 +80,7 @@
                 <span class="input-group-addon alert-warning ValidationOK" id="errEmail">*</span>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="row">
         <div class="col-md-12">
@@ -146,117 +146,70 @@
         </div>
     </div>
 
+    @foreach (System.Data.DataRow row in Model[0].Rows)
+    {
+        <div class="row">
+            <div class="col-md-12 well modWell">
+                <div class="col-md-12">ADDRESS: @(row.ItemArray[6].ToString()) </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Street</span>
+                    <input class="form-control" id="txtADStreet" type="text" value="@(row.ItemArray[2].ToString())" disabled>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <div class="input-group">
+                        <span class="input-group-addon">City</span>
+                        <input class="form-control" id="txtADStreet" type="text" value="@(row.ItemArray[3].ToString())" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <div class="input-group">
+                        <span class="input-group-addon">Thana</span>
+                        <input class="form-control" id="txtADStreet" type="text" value="@(row.ItemArray[4].ToString())" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <div class="input-group">
+                        <span class="input-group-addon">Country</span>
+                        <input class="form-control" id="txtADStreet" type="text" value="@(row.ItemArray[5].ToString())" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     <div class="row">
         <div class="col-md-12 well modWell">
-            <div class="col-md-12">ADDRESS</div>
+            <div class="col-md-12">CONTACT INFORMATION</div>
         </div>
         <div class="col-md-12">
-            <div class="input-group">
-                <span class="input-group-addon">Street</span>
-                <input class="form-control" id="txtADStreet" type="text" value="@Model[1]" disabled>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="">
-                <div class="input-group">
-                    <span class="input-group-addon">City</span>
-                    <input class="form-control" id="txtADStreet" type="text" value="@Model[2]" disabled>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="">
-                <div class="input-group">
-                    <span class="input-group-addon">Thana</span>
-                    <input class="form-control" id="txtADStreet" type="text" value="@Model[3]" disabled>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="">
-                <div class="input-group">
-                    <span class="input-group-addon">Country</span>
-                    <input class="form-control" id="txtADStreet" type="text" value="@Model[4]" disabled>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 well modWell">
-            <div class="col-md-12">COMPANY CONTACT</div>
-        </div>
-        <div class="col-md-12">
-            @foreach (System.Data.DataRow row in Model[5].Rows)
+            @foreach (System.Data.DataRow row in Model[1].Rows)
             {
-                int i = 0;
-                if ((row.ItemArray[7].ToString() == "Proprietor")
-                    || (row.ItemArray[7].ToString() == "CEO")
-                    || (row.ItemArray[7].ToString() == "Managing Director")
-                    || (row.ItemArray[7].ToString() == "Chairman")
-                    || (row.ItemArray[7].ToString() == "MD"))
-                {
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Chairman / MD / CEO / Proprietor</span>
-                            </div>
-                            <div class="col-xs-7">
-                                <input class="form-control" id="txtPrimaryContactName" type="text" value="@row.ItemArray[8].ToString()" disabled>
-                            </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="col-xs-5">
+                            <span class="input-group-addon borderMod">@row.ItemArray[0].ToString()</span>
                         </div>
-                        <div class="col-sm-5 setFloat">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Phone</span>
-                            </div>
-                            <div class="col-xs-7 pull-left">
-                                <input class="form-control" id="txtPrimaryContactPhone" type="text" value="@row.ItemArray[9].ToString()" disabled>
-                            </div>
+                        <div class="col-xs-7">
+                            <input class="form-control" id="txtPrimaryContactName" type="text" value="@row.ItemArray[1].ToString()" disabled>
                         </div>
                     </div>
-                }
-                else if ((row.ItemArray[7].ToString() == "HOS&M")
-                    || (row.ItemArray[7].ToString() == "Head of Sales / Marketing"))
-                {
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Head of Sales & Marketing</span>
-                            </div>
-                            <div class="col-xs-7">
-                                <input class="form-control" id="txtSecondaryContactName" type="text" value="@row.ItemArray[8].ToString()" disabled>
-                            </div>
+                    <div class="col-sm-5 setFloat">
+                        <div class="col-xs-5">
+                            <span class="input-group-addon borderMod">Phone</span>
                         </div>
-                        <div class="col-sm-5 setFloat">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Phone</span>
-                            </div>
-                            <div class="col-xs-7 pull-left">
-                                <input class="form-control" id="txtSecondaryContactPhone" type="text" value="@row.ItemArray[9].ToString()" disabled>
-                            </div>
+                        <div class="col-xs-7 pull-left">
+                            <input class="form-control" id="txtPrimaryContactPhone" type="text" value="@row.ItemArray[2].ToString()" disabled>
                         </div>
                     </div>
-                }
-                else if (row.ItemArray[10].ToString() == "Y")
-                {
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Representative Name</span>
-                            </div>
-                            <div class="col-xs-7">
-                                <input class="form-control" id="txtRepresentativeContactName" type="text" value="@row.ItemArray[8].ToString()" disabled>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 setFloat">
-                            <div class="col-xs-5">
-                                <span class="input-group-addon borderMod">Phone</span>
-                            </div>
-                            <div class="col-xs-7 pull-left">
-                                <input class="form-control" id="txtRepresentativeContactPhone" type="text" value="@row.ItemArray[9].ToString()" disabled>
-                            </div>
-                        </div>
-                    </div>
-                }
+                </div>
             }
         </div>
     </div>
@@ -276,7 +229,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="example" class="table table-striped table-bordered table-hover" width="100%;" cellspacing="0">
+                    <table id="attachcer" class="table table-striped table-bordered table-hover" width="100%;" cellspacing="0">
                         <thead>
                             <tr>
                                 <th style="width: 25%">Experience Area</th>

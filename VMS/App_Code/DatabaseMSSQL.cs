@@ -14,7 +14,9 @@ namespace VMS.App_Code
         DataSet ds = null;
 
         public DatabaseMSSQL()
-        { connTable.Add("DBA", "Data Source=localhost; Initial Catalog=VMS; User ID=sa; Password=Roger;"); }
+        { 
+            connTable.Add("DBA", "Data Source=localhost; Initial Catalog=VMS; User ID=sa; Password=Roger;");  // LOCAL DEV DB
+        }
         public SqlDataReader getList(string query, string dbName = "DBA")
         {
             myConnection = new SqlConnection(connTable[dbName].ToString());
@@ -112,7 +114,7 @@ namespace VMS.App_Code
                 if (dt.Rows.Count != 0)
                     return dt;
                 else
-                    return null;
+                    return dt;
             }
             catch
             { return null; }

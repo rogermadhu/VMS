@@ -1,0 +1,1023 @@
+﻿
+@{
+    ViewBag.Title = "ViewSIF";
+    Layout = "~/Views/Admin/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "VendorsList";
+    Layout = "~/Views/Admin/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dataTableDiv {
+        background-color: #f0f0f0;
+        border: 1px solid;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 5px;
+        width: 100%;
+        -webkit-box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+        -moz-box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+        box-shadow: -5px 4px 4px -2px rgba(0,0,0,0.5);
+    }
+
+        .dataTableDiv div div {
+            /*background-color:red;*/
+        }
+
+    /* Modal Header */
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #0c4da2;
+        color: white;
+    }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #0c4da2;
+        color: white;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: 100px auto auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+    }
+
+    .close {
+        color: white !important;
+        padding: 3px !important;
+        margin-top: 10px !important;
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes animatetop {
+        from {
+            top: 600px;
+            opacity: 0;
+        }
+
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+
+    @@keyframes animatetop {
+        from {
+            top: 600px;
+            opacity: 0;
+        }
+
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+</style>
+
+<h2>SIF Submitted Vendors List</h2>
+
+<div class="dataTableDiv">
+    <table id="tblVendor">
+        <thead>
+            <tr>
+                <th>SERIAL</th>
+                <th>ORG NAME</th>
+                <th>DOE</th>
+                <th>WEBSITE</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!-- The Modal -->
+<div id="Modal" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>Organization Details</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <input id="tempVid" type="hidden" value="">
+                <ul class="nav nav-tabs" id="tabContent">
+                    <li class="active" id="details"><a href="#details" data-toggle="tab">Details</a></li>
+                    <li id="products"><a href="#products" data-toggle="tab">Products</a></li>
+                    <li id="contacts"><a href="#contacts" data-toggle="tab">Contacts</a></li>                    
+                    <li id="address"><a href="#address" data-toggle="tab">Address</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="control-group">
+                            <label class="control-label" id="detailsHeader"></label>
+                        </div>
+                        <div id="detailsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="productsHeader"></label>
+                        </div>
+                        <div id="productsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="contactsHeader"></label>
+                        </div>
+                        <div id="contactsContent">   </div>
+                    </div>
+                    <div class="tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" id="addressHeader"></label>
+                        </div>
+                        <div id="addressContent">   </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+
+<div id="modalApprove" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>APPROVE VENDOR</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <input id="tempVidApprove" type="hidden" value="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12" style="text-align:center; margin-bottom:10px;">
+                                <div id="msgApprove"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="" class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="col-xs-2" style="padding-left: 0; padding-right: 0; ">
+                                        <span style="">SELECT HEAD CATEGORY</span>
+                                    </div>
+                                    <div class="col-xs-3" style="padding-left: 0">
+                                        <select id="ddlCategory" multiple="multiple" style="width:100% !important">
+                                            @*<option value="EE9FB3FD-E4EB-4491-8B51-8AEF5DA6B5EB">&nbsp;Manufacturer</option>
+                                            <option value="7AC246C0-5EBD-415E-949D-3E1C57A0DFAD">&nbsp;Trader</option>
+                                            <option value="A64BE963-0E14-4F57-96DD-BA6371410CE0">&nbsp;Service Provider</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2" style="text-align:right; padding-right:0;">
+                                        <span class="" id="categoryName">OTHER TYPE</span>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <input class="col-sm-4 form-control" id="txtCategoryType" type="text" />
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left: 0px; text-align:left;">
+                                        <button id="categoryTypeAdd" class="btn btn-primary" onclick="return false;">&nbsp;Add</button>
+                                    </div>
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errCategoryType">*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="" class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="col-xs-2" style="padding-left: 0; padding-right: 0; ">
+                                        <span style="">SELECT SUB CATEGORY</span>
+                                    </div>
+                                    <div class="col-xs-3" style="padding-left: 0">
+                                        <select id="ddlSubCategory" multiple="multiple" style="width:100% !important">
+                                            @*<option value="EE9FB3FD-E4EB-4491-8B51-8AEF5DA6B5EB">&nbsp;Manufacturer</option>
+                                            <option value="7AC246C0-5EBD-415E-949D-3E1C57A0DFAD">&nbsp;Trader</option>
+                                            <option value="A64BE963-0E14-4F57-96DD-BA6371410CE0">&nbsp;Service Provider</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2" style="text-align:right; padding-right:0;">
+                                        <span class="" id="subCategoryName">OTHER SUB TYPE</span>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <input class="col-sm-4 form-control" id="txtSubCategoryType" type="text" />
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left: 0px; text-align:left;">
+                                        <button id="subCategoryTypeAdd" class="btn btn-primary" onclick="return false;">&nbsp;Add</button>
+                                    </div>
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errSubCategoryType">*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="" class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="col-xs-2" style="padding-left: 0; padding-right: 0; ">
+                                        <span style="">Select POC</span>
+                                    </div>
+                                    <div class="col-xs-9" style="padding-left: 0">
+                                        <select id="ddlPOC" multiple="false" style="width:100% !important"></select>
+                                    </div>
+                                    <span class="input-group-addon alert-warning ValidationOK" id="errddlPOCType">*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                &nbsp;
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-success btn-md pull-right" style="margin-top: 10px; margin-right: 28%;" onclick="PostApproved($('#tempVidApprove').val())" >Approve</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+
+<div id="modalReject" class="modal" style="overflow-y: auto;">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h3>REJECT VENDOR</h3>
+        </div>
+        <div class="modal-body">
+            <div id="modal_content">
+                <input id="tempVidReject" type="hidden" value="">
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center; margin-bottom:10px;">
+                        <div id="msgReject"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center">
+                        <h4 style="color: red;">YOU ARE ABOUT TO REJECT SIF FORM</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5>Provide reason for rejection.</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="reason" style="text-align: left;
+                            width: 100%;
+                            max-width:none !important;
+                            height: 200px;"></textarea>
+                    </div>
+                </div>
+                <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: top">
+                        <input id="btnReject" type="text" class="btn btn-danger pull-right" onclick="PostReject($('#tempVidReject').val())" value="REJECT" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h5>© 2016 - Vendor Management System</h5>
+        </div>
+    </div>
+</div>
+
+
+@*@Scripts.Render("https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js")*@
+@*@Styles.Render("https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css")*@
+
+@Styles.Render("~/Content/DataTables/css/jquery.dataTables.min.css")
+@Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+
+@Scripts.Render("~/Scripts/DataTables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/DataTables/responsive.bootstrap.min.js")
+
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+
+<script type="text/javascript">
+    var modal = document.getElementById('Modal');
+    var span = document.getElementsByClassName("close")[0];
+
+    var modalApprove = document.getElementById('modalApprove');
+    var spanApprove = document.getElementsByClassName("close")[1];
+
+    var modalReject = document.getElementById('modalReject');
+    var spanReject = document.getElementsByClassName("close")[2];
+
+    function clearAllContentsModal() {
+        $("#detailsContent").text("");
+        $("#productsContent").text("");
+        $("#contactsContent").text("");
+        $("#addressContent").text("");
+    }
+    function ModalClearSetActive(tab) {
+        $("#" + tab).text("");
+        var t = $("#"+tab).parent().parent();
+        for (i = 0; i < t.children().length; i++) {
+            if ($(t.children()[i]).hasClass("active")) {
+                $(t.children()[i]).removeClass("active");
+            }
+            console.log();
+        }
+        $("#"+tab).parent().addClass("active");
+    }
+    
+    function GetDetails(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var rowS = "<div class=\"row\">";
+        var col6S = "<div class=\"col-md-6\">";
+        var col12S = "<div class=\"col-md-12\">";
+        var fgS = "<div class=\"form-group\">";
+        var lblS = "<label class=\"col-sm-2 control-label\">";
+        var lblE = "</label>";
+        var divSM10S = "<div class=\"col-sm-12\">";
+        var divSM6S = "<div class=\"col-sm-6\">";
+        var divE = "</div>";
+        ModalClearSetActive("detailsContent");
+        var content = $("#detailsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if(result != null) {
+                    var element = containerS;
+                        element += rowS;
+                            element += col6S;
+                                element += fgS + "<b>NAME: </b>";
+                                element += divSM10S + result["Table"][0]["VENDOR_NAME"] + divE + divE;
+                            element += divE;
+                            element += col6S;
+                                element += fgS + "<b>WEBSITE: </b>";
+                                element += divSM10S + "<a target=\"_blank\" href=\"http://" + result["Table"][0]["WEBSITE"] + "\">" + result["Table"][0]["WEBSITE"] + "</a>" + divE + divE;
+                            element += divE;
+                        element += divE;
+                        element += rowS;
+                            element += col12S;
+                            element += fgS + "<b>BUSINESS TYPE: </b>";
+                            element += divE;
+                        element += divE;
+                        for (var i = 0; i < result["Table"].length; i++) {
+                            
+                            element += col6S;
+                                element += divSM6S + result["Table"][i]["TOB"] + divE;
+                            element += divE;
+                            
+                        }
+                    element += divE;
+                    element += "<hr />";
+
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetProducts(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("productsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var content = $("#productsContent");
+                    var element = containerS;
+
+                    for (var i = 0; i < result["Table"].length; i++) {
+                    element += row;
+                        element += "<div class=\"col-md-1\" style=\"height:150px !important;\">";
+                            element += "<p>SL</p>";
+                            element += "<h4>";
+                            element += "<div class=\"label label-default\">";
+                                element += i+1;
+                                    element += "</div>";
+                                element += "</h4>";
+                                element += "</div>";
+                                element += "<div class=\"col-md-6\" style=\"height:150px !important;\">";
+                                    element += "<p>Product Name</p>";
+                                    element += "<div class=\"list-group-item disabled\">";
+                                        element += result["Table"][i]["PRODUCT_NAME"];
+                                    element += "</div>";
+                                element += "</div>";
+                                element += "<div class=\"col-md-3\" style=\"height:150px !important;\">";
+                                    element += "<p>Product Type</p>"
+                                    element += "<div class=\"list-group-item disabled\">";
+                                    if(result["Table"][i]["IS_SERVICE"] == "Y") {
+                                        element += "<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" style=\"padding: 2px;\"></span>" + " Service";
+                                    }
+                                    else {
+                                        element += "Product";
+                                    }
+                                    element += divE;
+                                element += divE;
+                                element += "<div class=\"col-md-2\">";
+                                    element += "<p>Catalogue</p>";
+                                    element += "<img class=\"img-thumbnail pull-right\" style=\"width:150px; height:150px;\">";
+                                element += divE;
+                            element += divE;
+                        element += "<hr/>";
+                    }
+                    element += divE;
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetContacts(URL, Data) {
+        var containerS = "<div class=\"container-fluid\">";
+        var row = "<div class=\"row\">";
+        var col6S = "<div class=\"col-md-6\">";
+        var fgS = "<div class=\"form-group\">";
+        var lblS = "<label class=\"col-sm-2 control-label\">";
+        var lblE = "</label>";
+        var divSM10S = "<div class=\"col-sm-12\">";
+        var divE = "</div>";
+
+        ModalClearSetActive("contactsContent");
+        var content = $("#contactsContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element = "<div class=\"control-group\"> ";
+                    element += row;
+                    for (var i = 0; i < result["Table"].length; i++) {
+                        element += "<div class=\"col-md-12\" style=\"background-color: ";
+                        if (result["Table"][i]["IS_POC"] == "Y") { element += "#ffcd85" } else { element += "#efefef"; }
+                            element += "; margin-bottom:10px; border: 1px solid #efefef; padding:5px\"> " +
+                              "<div class=\"col-md-1\"> " +
+                                "<b>SL: " + (i+1) + "</b> " +
+                              "</div> " +
+                              "<div class=\"col-md-6\"> " +
+                                "<div class=\"col-md-4\"> " +
+                                  "<b>Name: </b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["VCP_NAME"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                  "<b>Designation:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["DESIGNATION_NAME"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Phone No:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["TEL_NO"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Phone No:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  result["Table"][i]["CELL_NO"] +
+                                "</div> " +
+                                "<div class=\"col-md-4\"> " +
+                                   "<b>Email:</b> " +
+                                "</div> " +
+                                "<div class=\"col-md-8\"> " +
+                                  "<a href=\"mailto:" + result["Table"][i]["EMAIL"] + "\">" + result["Table"][i]["EMAIL"] + "</a>" +
+                                "</div>" +
+                              "</div> " +
+                              "<div class=\"col-md-5\" style=\"background-color: #f5f5f5; border: 2px solid #bcbcbc;\"><a href:roger.shubho@fdl.com.bd=\"\" <=\"\" a=\"\"> " +
+                                "</a><div style=\"max-height: 200px; min-height: 100px; text-align:center\"><a href:roger.shubho@fdl.com.bd=\"\" <=\"\" a=\"\"></a><a><img href=\"/content/uploads/test%20%/products/_proFile_0636123048359595778.jpeg\"></a></div> " +
+                              "</div> " +
+                            "</div> ";
+                    }
+                    element += divE + divE;
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+    function GetAddress(URL, Data) {
+        ModalClearSetActive("addressContent");
+        var content = $("#addressContent");
+        var res =
+        $.ajax
+        ({
+            type: "POST",
+            url: URL,
+            data: JSON.stringify(Data),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var element =
+                        "<div class=\"control-group\">";
+                    for (var i = 0; i < result["Table"].length; i++) {
+                        element += "<div class=\"row\">" +
+                          "<div class=\"col-lg-12\" style=\"padding-top: 20px;\"></div>" +
+                        "</div>" +
+                        "<div class=\"row\" style=\"background-color: #efefef; padding-top:10px; margin: 0px; border: 1px solid #c8c8c8\">" +
+                              "<div class=\"col-lg-12\">" +
+                              "<div class=\"row\">" +
+                                "<div class=\"col-md-3\">" +
+                                  "<label>ADDRESS OF :</label>" +
+                                "</div>" +
+                                "<div class=\"col-md-9\">" +
+                                  "<label>" + result["Table"][i]["TYPE_NAME"] + "</label>" +
+                                "</div>" +
+                              "</div>" +
+                              "<div style=\"margin-left: 20px;\">" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>STREET ADDRESS</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["STREET_ADDRESS"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>THANA</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["THANA"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>CITY</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["CITY"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>COUNTRY</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["COUNTRY"] +
+                                  "</div>" +
+                                "</div>" +
+                                "<div class=\"row\">" +
+                                  "<div class=\"col-md-3\">" +
+                                    "<label>ZIP</label>" +
+                                  "</div>" +
+                                  "<div class=\"col-md-9\">" +
+                                    result["Table"][i]["ZIP"] +
+                                  "</div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>" +
+                          "</div>" +
+                        "</div>";
+                        }
+                        element += "</div>";
+                    content.append(element);
+                }
+            },
+            error: function (err) {
+                res = "failed";
+            }
+        });
+        return res;
+    }
+
+    function OpenModal(id) {
+        // MAKE FIRST AJAX CALL
+        $("#tempVid").val(id);
+        bindDetails(id);
+        modal.style.display = "block";
+    }
+    function OpenModalApprove(id) {
+        $("#tempVidApprove").val(id);
+        $("#msgApprove").html("&nbsp;");
+        $("#msgApprove").removeClass("alert-danger");
+        getParentCategory();
+        getPOC(id);
+        modalApprove.style.display = "block";
+    }
+    function OpenModalReject(id) {
+        $("#tempVidReject").val(id);
+        $("#msgReject").html("&nbsp;");
+        $("#msgReject").removeClass("alert-danger");
+        modalReject.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    spanApprove.onclick = function () {
+        $("#tempVidApprove").val("");
+        modalApprove.style.display = "none";
+    }
+    spanReject.onclick = function () {
+        $("#tempVidReject").val("");
+        modalReject.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            $("#tempVid").val("");
+            modal.style.display = "none";
+        }
+        if (event.target == modalApprove) {
+            $("#tempVidApprove").val("");
+            $("#ddlCategory").text("");
+            modalApprove.style.display = "none";
+        }
+        if (event.target == modalReject) {
+            $("#tempVidReject").val("");
+            modalReject.style.display = "none";
+        }
+    }
+    
+    // MAKE AJAX GLOBAL FUNCTION FOR EACH TAB HERE
+    function bindDetails() {
+        var sector = "details";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetDetails("Vendors_GetSIF", data);
+    }
+    function bindProducts() {
+        var sector = "products";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetProducts("Vendors_GetSIF", data);
+    }
+    function bindContacts() {
+        var sector = "contacts";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetContacts("Vendors_GetSIF", data);
+    }
+    function bindAddress() {
+        var sector = "address";
+        var data = { vendor: $("#tempVid").val(), sector: sector };
+        GetAddress("Vendors_GetSIF", data);
+    }
+
+    // AJAX POST APPROVED STARTS
+    function PostApproved(id) {
+        if (id != null) {
+            var
+                category = $("#ddlCategory").multipleSelect("getSelects"),
+                subCategory = $("#ddlSubCategory").multipleSelect("getSelects"),
+                poc = $("#ddlPOC").multipleSelect("getSelects");
+            var fd = new FormData();
+            fd.append("category", category);
+            fd.append("subCategory", subCategory);
+            fd.append("poc", poc);
+            fd.append("vid", id);
+
+            $.ajax({
+                url: 'PostApproved',
+                data: fd,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    if (data["result"] == false) {
+                        $("#msgApprove").html("<br /><strong>Provide all information</strong><br /><br />");
+                        $("#msgApprove").addClass("alert-danger");
+                    }
+                    if (data["result"] == true) {
+                        $("#msgApprove").html("<br /><strong>APPROVED</strong><br /><br />");
+                        $("#msgApprove").addClass("alert-success");
+                    }
+                }
+            });
+            return false;
+        }
+        return false;
+    }
+    // AJAX POST APPROVED ENDS
+
+    // AJAX POST REJECT STARTS
+    function PostReject(id) {
+        if (id != null) {
+            var
+                remarks = $("#reason").val();
+            var fd = new FormData();
+            fd.append("remarks", remarks);
+            fd.append("vid", id);
+
+            $.ajax({
+                url: 'PostReject',
+                data: fd,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    if (data["result"] == false) {
+                        $("#msgReject").html("<br /><strong>Check your internet connection and try again.</strong><br /><br />");
+                        $("#msgReject").addClass("alert-danger");
+                    }
+                    if (data["result"] == true) {
+                        $("#msgReject").html("<br /><strong>REJECTED</strong><br /><br />");
+                        $("#msgReject").addClass("alert-success");
+                    }
+                }
+            });
+            return false;
+        }
+        return false;
+    }
+    // AJAX POST REJECT ENDS
+
+    function getParentCategory() {
+        $.ajax({
+            type: "GET",
+            url: "getParentCategory",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    $("#ddlCategory").append("<option value=\"" + response[i]["ID"] + "\">&nbsp;" + response[i]["CATEGORY"] + "</option>")
+                }
+                $("#ddlCategory").multipleSelect("refresh");
+            },
+            failure: function (response) {
+                alert("Something went wrong");
+            }
+        });
+    }
+    function getChildCategory(parents) {
+        $("#ddlSubCategory").text("");
+        $("#ddlSubCategory").multipleSelect("refresh");
+
+        for (var i = 0; i < parents.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "getChildCategory",
+                data: JSON.stringify({ parentId: parents[i] }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",                
+                success: function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        $("#ddlSubCategory").append("<option value=\"" + response[i]["ID"] + "\">&nbsp;" + response[i]["CATEGORY"] + "</option>");
+                        $("#ddlSubCategory").multipleSelect("refresh");
+                    }
+                },
+                failure: function (response) {
+                    alert("Something went wrong");
+                }
+            });
+        }
+    }
+
+    function getPOC(vid) {
+        $("#ddlPOC").text("");
+        $("#ddlPOC").multipleSelect("refresh");
+        $.ajax({
+            type: "POST",
+            url: "getPOC",
+            data: JSON.stringify({ vId: vid }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    $("#ddlPOC").append("<option value=\"" + response[i]["VCPID"] + "\">&nbsp;" + response[i]["VCP"] + "</option>");
+                    $("#ddlPOC").multipleSelect("refresh");
+                }
+            },
+            failure: function (response) {
+                alert("Something went wrong");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // BIND MODAL TAB EVENTS HERE
+        $("#details").click(function () {
+            bindDetails();
+        });
+        $("#products").click(function () {
+            bindProducts();
+        });
+        $("#contacts").click(function () {
+            bindContacts();
+        });
+        $("#address").click(function () {
+            bindAddress();
+        });
+        // LOAD DATATABLE
+        $("#tblVendor").DataTable({
+            "ajax": {
+                "url": "getVendorListSif",
+                "type": "GET",
+                "datatype": "json",
+                "contentType": "application/json; charset=utf-8",
+                "dataSrc": function (result) {
+                    return result;
+                }
+            },
+            "columns": [
+                { "data": "SL", "autoWidth": false },
+                { "data": "VENDOR_NAME", "autoWidth": false },
+                { "data": "DOE", "autoWidth": false },
+                { "data": "WEBSITE", "autoWidth": false },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "visible" : false,
+                    "mRender": function (data, type, row) {
+                        return data["VENDOR_GUID"];
+                    }
+                },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function ( data, type, row ) {
+                        var id = data["VENDOR_GUID"];
+                        return '<a id="1" class="btn btn-info btn-sm delete_modal" onClick="OpenModal(\''+id+'\')">' + 'Details' + '</a>';
+                    }
+                },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        return '<a id="1" class="btn btn-danger btn-sm delete_modal" onClick="OpenModalReject(\'' + data["VENDOR_GUID"] + '\')">' + 'Reject' + '</a>';
+                    }
+                },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        return '<a id="1" class="btn btn-success btn-sm delete_modal" onClick="OpenModalApprove(\'' + data["VENDOR_GUID"] + '\')">' + 'Approve' + '</a>';
+                    }
+                }
+            ]
+        });
+//// Add poc from ajax here
+//        $("#ddlPOC").append('<option value="">&nbsp;new</option>')
+//// Add poc from ajax ends here
+
+        $("#ddlCategory").multipleSelect({
+            onOpen: function () {
+                $("#errCategoryType").text("*");
+                $("#txtCategoryType").removeClass("alert-danger");
+            },
+            onClose: function () {
+                if ($("#ddlCategory").multipleSelect("getSelects") == "") {
+                    $("#errCategoryType").text("This Field Is Required.");
+                    $("#txtCategoryType").addClass("alert-danger");
+                    console.log($(this).parent());
+                }
+                else {
+                    $("#errCategoryType").text("*");
+                    $("#txtCategoryType").removeClass("alert-danger");
+                    getChildCategory($("#ddlCategory").multipleSelect("getSelects"));
+                }
+            }
+        });
+        $("#categoryTypeAdd").click(function () {
+            var $select = $("#ddlCategory"),
+                $input = $("#txtCategoryType"),
+                $selected = $("#refreshSelected"),
+                value = $.trim($input.val()),
+                $opt = $("<option />", {
+                    value: value,
+                    text: " " + value
+                });
+            if (!value) {
+                $input.focus();
+                return;
+            }
+            $opt.prop("selected", true);
+            $input.val("");
+            $("#errCategoryType").text("*");
+            $("#txtCategoryType").removeClass("alert-danger");
+            $select.append($opt).multipleSelect("refresh");
+        });
+
+        $("#ddlSubCategory").multipleSelect({
+            onOpen: function () {
+                $("#errSubCategoryType").text("*");
+                $("#txtSubCategoryType").removeClass("alert-danger");
+            },
+            onClose: function () {
+                if ($("#ddlSubCategory").multipleSelect("getSelects") == "") {
+                    $("#errSubCategoryType").text("This Field Is Required.");
+                    $("#txtSubCategoryType").addClass("alert-danger");
+                    console.log($(this).parent());
+                }
+                else {
+                    $("#errSubCategoryType").text("*");
+                    $("#txtSubCategoryType").removeClass("alert-danger");
+                }
+            }
+        });
+        $("#subCategoryTypeAdd").click(function () {
+            var $select = $("#ddlSubCategory"),
+                $input = $("#txtSubCategoryType"),
+                $selected = $("#refreshSelected"),
+                value = $.trim($input.val()),
+                $opt = $("<option />", {
+                    value: value,
+                    text: " " + value
+                });
+            if (!value) {
+                $input.focus();
+                return;
+            }
+            $opt.prop("selected", true);
+            $input.val("");
+            $("#errSubCategoryType").text("*");
+            $("#txtSubCategoryType").removeClass("alert-danger");
+            $select.append($opt).multipleSelect("refresh");
+        });
+
+        $("#ddlPOC").multipleSelect({
+            onOpen: function () {
+                $("#errPOCType").text("*");
+            },
+            single:true,
+            onClose: function () {
+                if ($("#ddlPOC").multipleSelect("getSelects") == "") {
+                    $("#errPOCType").text("This Field Is Required.");
+                }
+                else {
+                    $("#errPOCType").text("*");
+                    $("#txtPOCType").removeClass("alert-danger");
+                }
+            }
+        });
+    });
+
+</script>

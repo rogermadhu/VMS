@@ -41,30 +41,63 @@ namespace VMS.Models
         {
             DatabaseMSSQL db = new DatabaseMSSQL();
 
+            /*
+             * DATABASE FLAG STATUS OPTIONS
+                1.  SIF after submit 
+                        VENDOR_IS_ACTIVE = Y
+                        VENDOR_STATUS = P
+                    1a  SIF approved
+                            VENDOR_STATUS = A       <-- login redirect to SEF for vendor
+                    1b  SIF rejected
+                            VENDOR_STATUS = R
+                2.  SEF after submit
+                        IS_AGREED = Y
+                        VENDOR_STATUS = S
+                    2a  SEF approved
+                            VENDOR_STATUS = E
+                    2b  SEF rejected
+                            VENDOR_STATUS = F
+                3.  AUDIT
+                    3a  AUDIT accepted
+                            VENDOR_STATUS = Y       <-- vendor login portal if required
+                    3b  AUDIT rejected
+                            IS_APPROVED
+                            VENDOR_STATUS = N
+                            VENDOR_IS_ACTIVE = N
+            */
             string query =
                 @"DECLARE @un varchar(max) BEGIN SET @un = '"  +ml.un + @"' END
                 DECLARE @pw varchar(max) BEGIN SET @pw = '" + ml.pw + @"' END
-
                 DECLARE @IsValid char(1) BEGIN SET @IsValid = 'N' END
                 DECLARE @IsVendor char(1) BEGIN SET @IsVendor = '' END
+                DECLARE @Status CHAR(1) BEGIN SET @STATUS = '' END
 
-                IF EXISTS(SELECT TOP(1) USERNAME, [PASSWORD] FROM VENDOR WHERE USERNAME = @un AND PASSWORD = @pw AND VENDOR_IS_ACTIVE = 'Y')
-                BEGIN 
-	                BEGIN SET @IsValid = 'Y' END
-	                BEGIN SET @IsVendor = 'Y' END
-                END
-                ELSE
-                IF EXISTS(SELECT TOP(1) USER_EMAIL, USER_PWD FROM [USER] WHERE USER_EMAIL = @un AND USER_PWD = @pw AND USER_IS_ACTIVE = 'Y')
+                IF EXISTS(SELECT TOP(1) 1 FROM [USER] WHERE USER_EMAIL = @un AND USER_PWD = @pw AND USER_IS_ACTIVE = 'Y')
                 BEGIN
 	                BEGIN SET @IsValid = 'Y' END
 	                BEGIN SET @IsVendor = 'N' END
                 END
                 ELSE
                 BEGIN
-	                BEGIN SET @IsValid = 'N' END
-	                BEGIN SET @IsVendor = '' END
+	                SET @Status = (
+		                SELECT TOP(1) 
+			                VENDOR_STATUS
+		                FROM 
+			                VENDOR 
+		                WHERE 
+			                [PASSWORD] = @pw 
+			                AND VENDOR_IS_ACTIVE = 'Y'
+			                AND (
+				                TEMP_ID1 = @un
+				                OR VENDOR_CODE = @un
+				                OR USERNAME = @un
+			                )
+	                )
+	                BEGIN SET @IsValid = 'Y' END
+	                BEGIN SET @IsVendor = 'Y' END
                 END
-                SELECT @IsValid AS 'VALID', @IsVendor AS 'VENDOR'";
+
+                SELECT @IsValid AS 'VALID', @IsVendor AS 'VENDOR', @Status AS 'STATUS'";
 
             return db.GetDataTable(query);
         }

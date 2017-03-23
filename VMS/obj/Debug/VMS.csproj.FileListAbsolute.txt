@@ -57,6 +57,6 @@ E:\Roger\Projects\Vendor Management Software\Codes\VMS\bin\System.Web.WebPages.R
 E:\Roger\Projects\Vendor Management Software\Codes\VMS\bin\System.Net.Http.Formatting.xml
 E:\Roger\Projects\Vendor Management Software\Codes\VMS\bin\System.Web.Http.xml
 E:\Roger\Projects\Vendor Management Software\Codes\VMS\bin\System.Web.Http.WebHost.xml
-E:\Roger\Projects\Vendor Management Software\Codes\VMS\obj\Debug\VMS.csprojResolveAssemblyReference.cache
 E:\Roger\Projects\Vendor Management Software\Codes\VMS\obj\Debug\VMS.dll
 E:\Roger\Projects\Vendor Management Software\Codes\VMS\obj\Debug\VMS.pdb
+E:\Roger\Projects\Vendor Management Software\Codes\VMS\obj\Debug\VMS.csprojResolveAssemblyReference.cache
